@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Mobile Development Group Blog &middot; 
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p><a href="https://facebook.com/mdgiitr" target="_blank">Mobile Development Group</a> is a student Group at IIT Roorkee that promotes tech based learning pertaining to smartphones and tablets.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+          <!--<a class="sidebar-nav-item" href="/about/">About</a>-->
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    <a class="sidebar-nav-item" href="https://github.com/sdsmdg/sdsmdg.github.io">Blog on GitHub</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Mobile Development Group Blog</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+      <div class="container content">
+        
+        <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2015/01/06/starting-with-the-challenge/">
+        Starting with the challenge
+      </a>
+    </h1>
+    <span class="post-tagline">Setting up the development environment</span>
+    <span class="post-date">06 Jan 2015</span>
+
+    <!--<h2 id='installation_of_android_studio'>Installation of Android Studio</h2>
+
+<p>Android Studio is a latest and most widely accepted IDE designed by Google itself and quickly replacing Eclipse which was used earlier. If you want to develop apps in android then it is highly recommended to use Android Studio instead of Eclipse. Details for download and usage of android studio can be found <a href='http://developer.android.com/tools/studio/index.html'>here</a> as well as in the following video:</p>
+<center> <iframe allowfullscreen='allowfullscreen' frameborder='0' height='315' src='//www.youtube.com/embed/zEsDwzjPJ5c' width='560'> </iframe> </center>
+<h2 id='quick_start'>Quick Start</h2>
+
+<p>A typical native android application is written using XML for the frontend (the User Interface) and JAVA for the backend.</p>
+
+<h3 id='java'>JAVA</h3>
+
+<p>All the programming part in android development is done using JAVA. Although its a great advantage, if you know a thing or two about programming in Java, but even if you know any object oriented programming language, then it will not be much difficult to relate to the concepts used during development.</p>
+
+<p>Those who are familiar with other programming languages like C,C++ etc might need to understand a few concepts of JAVA which are not so commonly used in C and C++. Some of them have been mentioned here:</p>
+
+<ul>
+<li>Basic understanding of OOP concepts - classes, functions, meaning of public/private/protected, inheritance etc.</li>
+
+<li>Use of interfaces</li>
+
+<li>Types of identifiers such as static, abstract, final etc.</li>
+</ul>
+
+<h3 id='xml'>XML</h3>
+
+<p>This is used to build the app&#8217;s user interface. All user interface elements in an Android app are built using View and ViewGroup objects. A View is an object that draws something on the screen that the user can interact with. A ViewGroup is an object that holds other View (and ViewGroup) objects in order to define the layout of the interface.</p>
+
+<p>The Android developer kit provides an elegant and easy-to-use graphic interface to work with these components and avoid XML, and thus as a beginner, you can directly use this for your app. But as you move on, working with XML provides greater control over the design of the elements.</p>
+
+<p>Here is a list of basic UI elements which are used very often while developing android apps :</p>
+
+<ul>
+<li>
+<p><a href='http://developer.android.com/reference/android/widget/TextView.html'>TextView</a> : Displays text to the user and optionally allows them to edit it.</p>
+</li>
+
+<li>
+<p><a href='http://developer.android.com/guide/topics/ui/controls/text.html'>EditText</a> : EditText is a thin veneer over TextView that configures itself to be editable.</p>
+</li>
+
+<li>
+<p><a href='http://developer.android.com/guide/topics/ui/controls/button.html'>Button</a> : A button consists of text or an icon (or both text and an icon) that communicates what action occurs when the user touches it.</p>
+</li>
+
+<li>
+<p><a href='http://developer.android.com/guide/topics/ui/controls/spinner.html'>Spinner</a> : Select one value from a set. In the default state, a spinner shows its currently selected value.</p>
+</li>
+
+<li>
+<p><a href='http://developer.android.com/guide/topics/ui/layout/listview.html'>ListView</a> : ListView is a view group that displays a list of scrollable items.</p>
+</li>
+
+<li>
+<p><a href='http://developer.android.com/reference/android/widget/ImageView.html'>ImageView</a> : Displays an arbitrary image, such as an icon. The ImageView class can load images from various sources</p>
+
+<p>Now the first task as a part of your problem statement is to develop a form wherein you take the details of a new criminal as input. First of all, you will need a layout(Relative or Linear) to place the rest of the elements in it. Then you can use the EditText element to input his name, address, area in which he lives, and other information. TextView can be used to indicate these fields to the user corresponding to these EditTexts. Explore other elements as well and see if you can ask for more information using them. Finally have a submit and a clear button to store the record and clear the form respectively.</p>
+</li>
+</ul>
+
+<h3 id='running_the_app'>Running the app</h3>
+
+<p>An android application can run either on your device or in the emulator that comes bundled with the SDK. Since the emulators can be slow, it is always recommended to use an actual device. <a href='http://developer.android.com/training/basics/firstapp/running-app.html'>This</a> link contains detailed explanation for setting up your device/emulator for testing.</p>
+<br />
+<p>So that&#8217;s it from our side in this blog. In case of any problem you can visit the official android website, which has a huge documentation on almost every topic related to developing Android Studio, including Tools, downloadable Material, Designs, APIs ,etc. You can also post your doubts on this blog or in our <a href='http://fb.com/groups/sdsmobiledevelopment'>facebook group</a></p>
+
+<p>We will soon be back with the next blog in the android development series. Till then goodbye and happy coding !</p>-->
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2015/01/02/droid-wars/">
+        Droid Wars
+      </a>
+    </h1>
+    <span class="post-tagline">Recruitment challenge for Mobile Development Group</span>
+    <span class="post-date">02 Jan 2015</span>
+
+    <!--<h2 id='problem_statement'>Problem Statement</h2>
+
+<p>With crime in Gotham continuously on the rise, Batman is worried that his Utility Belt may not be enough anymore. So he needs you to create a “Bat-App” for him that will help him in his endeavours. He needs to maintain a record of all the wrongdoers spreading havoc in his city. This app should have the following screens :</p>
+
+<ul>
+<li>
+<p><strong>Home Screen</strong> This screen has 2 buttons - New record and View Records. Clicking on New record opens up a screen to create a new record and clicking on view existing records opens a list of records stored.</p>
+</li>
+
+<li>
+<p><strong>New Record</strong> When the user clicks on the new record button he will be taken to a new screen which will have a form asking the user for various inputs like criminal&#8217;s name , age , gender , crimes and last known/seen location. There will also be a button to save these records in a database..</p>
+</li>
+
+<li>
+<p><strong>View Records</strong> This screen will consist of a list of all the records stored locally. On clicking any item, the details of that particular criminal must be shown in the Details Screen</p>
+</li>
+
+<li>
+<p><strong>Details</strong> Here is where the details of criminals that are stored in the database must be shown.</p>
+</li>
+</ul>
+
+<h2 id='bonus_points_for'>Bonus Points For</h2>
+
+<ul>
+<li>Elegant User Interface</li>
+
+<li>If images of each criminal are stored and displayed</li>
+
+<li>Clicking on the last known location shows it on a map. You can take the latitude &amp; longitude of the location from the user at the time of filling a new entry. A better option can be to just open the map, let the user pinpoint the location and save the latitude &amp; longitude of that location. ( Refer Maps SDK for Android, Google Maps Android API v2 - Tutorial )</li>
+</ul>
+
+<h2 id='points_to_remember'>Points to Remember</h2>
+
+<ul>
+<li>Submit your entries latest by 20th January, 2015 to sdsmobilelabs@gmail.com. Your submission must include the zip file containing the source code and the apk file. Remember to write your name and contact information in the mail.</li>
+
+<li>In case you run into some problem or don&#8217;t know where to start, we have written a short blog that may help you.</li>
+
+<li>Join our facebook group for further queries and updates.</li>
+</ul>-->
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/12/31/introduction-to-android-development/">
+        Introduction To Android Development
+      </a>
+    </h1>
+    <span class="post-tagline">A hassle free getting started guide to android development</span>
+    <span class="post-date">31 Dec 2014</span>
+
+    <!--<h2 id='why_develop_for_android_'>Why Develop For Android ?</h2>
+
+<p>With over 1 billion Android devices already activated, Android represents an incredible opportunity for developers.</p>
+
+<p>As Android continues to grow beyond smartphones, it will become the brains behind invisible, ubiquitous cloud-connected computing. This is an introductory guide that will help you build awesome apps for smartphones and tablets today, and propel you towards exciting opportunities in Android&#8217;s future.</p>
+
+<h2 id='resources'>Resources</h2>
+
+<p>There are many resources online that can help you getting started. Here we are listing a few that will provide you an introduction to this exciting world :</p>
+
+<h3 id='video_tutorials'>Video Tutorials</h3>
+
+<ul>
+<li><a href='https://www.udacity.com/course/ud853'>Developing Android Apps</a> - Created by Google and offered on Udacity, this course is a nice stepping stone if you have prior programming experience.</li>
+
+<li><a href='https://www.udacity.com/course/ud849'>UX Design For Mobile</a> - Another one by Google, this course will help you understand the most important and immediately useful techniques and approaches used by great mobile UX designers</li>
+
+<li><a href='https://www.youtube.com/user/androiddevelopers/featured'>Android Developers Youtube Channel</a> - Videos containing demos, tutorials, and anything else related to Android development.</li>
+</ul>
+
+<h3 id='documentation'>Documentation</h3>
+
+<ul>
+<li><a href='http://developer.android.com/training/index.html'>Official Android Developer Documentation</a> - Highly recommended and something every android developer must refer to, weather a noob or a pro. Contains beginner level tutorials as well as referance of all classes for more advanced developers.</li>
+</ul>
+
+<h3 id='blogs'>Blogs</h3>
+
+<ul>
+<li><a href='http://www.vogella.com/tutorials/android.html'>Vogella Android Tutorials</a> - Short and precise tutorials about development for Android: tools installation, debugging and using various features.</li>
+
+<li><a href='http://www.androidhive.info/'>Android Hive</a> - Nice collection of tutorials, tips and hacks for android and game developers.</li>
+</ul>
+
+<h3 id='question_answer_forum'>Question Answer Forum</h3>
+
+<ul>
+<li><a href='http://www.stackoverflow.com/'>Stack Overflow</a> - Q/A forum for programmers. Most probably you will find the answer to your problem here. If not</li>
+
+<li><a href='https://www.google.com'>There is always Google !</a></li>
+</ul>-->
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    
+      <a class="pagination-item newer" href="/">Newer</a>
+    
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-58365637-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+# Dependencies
+highlighter:         pygments
+
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+relative_permalinks: true
+
+# Setup
+title:               Mobile Development Group Blog
+description:         '<a href="https://facebook.com/mdgiitr" target="_blank">Mobile Development Group</a> is a student Group at IIT Roorkee that promotes tech based learning pertaining to smartphones and tablets.'
+url:                 http://sdsmdg.github.io
+baseurl:             /
+paginate:            5
+
+# About/contact
+author:
+  name:              Mark Otto
+  url:               https://twitter.com/mdo
+  email:             markdotto@gmail.com
+
+# Custom vars
+version:             1.0.0

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Styles &middot; Mobile Development Group Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p><a href="https://facebook.com/mdgiitr" target="_blank">Mobile Development Group</a> is a student Group at IIT Roorkee that promotes tech based learning pertaining to smartphones and tablets.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+          <!--<a class="sidebar-nav-item" href="/about/">About</a>-->
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    <a class="sidebar-nav-item" href="https://github.com/sdsmdg/sdsmdg.github.io">Blog on GitHub</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Mobile Development Group Blog</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+      <div class="container content">
+        
+        <div class="post">
+  <h1 class="post-title">Styles</h1>
+  <span class="post-date">12 Apr 2015</span>
+  <p>While working with android you must have felt the importance as well as difficulties while styling your app.This article will help you understand the basics and utility of <strong><em>Styles</em></strong> in android.</p>
+
+<p><strong>Style</strong> in android are the properties pertaining to look and format of a view or a window.</p>
+
+<p>A <strong>theme</strong> is a style applied to an entire Activity or application.</p>
+
+<h2 id='resources'>Resources</h2>
+
+<p>All the app resources such as static content like layouts, strings etc are placed in res/ directory. res/values/ has XML files that contain simple values, such as strings, styles, colors etc.</p>
+
+<p>XML resource files in other res/ subdirectories define a single resource based on the XML filename whereas files in the values/ directory describe multiple resources. For a file in this directory, each child of the <code>&lt;resources&gt;</code> element defines a single resource. For example, a <code>&lt;string&gt;</code> element creates a R.string resource and a <code>&lt;color&gt;</code> element creates a R.color resource.</p>
+
+<p>All these resources are compiled and assigned an interger value in R.java file located at project/build/generated/source/r/debug/package/R.java or simply use ctrl+ N and type R.</p>
+
+<h2 id='alternative_resources'>Alternative Resources</h2>
+
+<p>You app runs on devices with different configuration.For example, to optimize the app for different screen sizes and densities you must provide alternative resources.Here is the way to do that:</p>
+
+<p>Create a new directory in res/ named in the form</p>
+
+<pre><code> &lt;resources_name&gt;-&lt;config_qualifier&gt;</code></pre>
+
+<ul>
+<li>
+<p><code>&lt;resources_name&gt;</code> is the directory name of the corresponding default resources.</p>
+</li>
+
+<li>
+<p><code>&lt;qualifier&gt;</code> is a name that specifies an individual configuration for which these resources are to be used.</p>
+</li>
+</ul>
+
+<p>For example: drawable/ and drawable-hdpi/ .The resource files must be named exactly the same as the default resource files.</p>
+
+<h2 id='accessing_resources'>Accessing Resources</h2>
+
+<p>So how to access these resources in your project? Let&#8217;s have a look at this.</p>
+
+<p>When the application is compiled, aapt(Android Asset Packaging Tool) generates the R class, which contains resource IDs for all the resources in project’s res/ directory.</p>
+
+<p>For each type of resource, there is an R subclass (for example, R.drawable for all drawable resources), and for each resource of that type, there is a static integer (for example, R.drawable.icon). This integer is the resource ID.</p>
+
+<p>A resource ID is always composed of:</p>
+
+<ul>
+<li>The resource type</li>
+
+<li>The resource name</li>
+</ul>
+
+<p><strong>There are two ways to access a resource:</strong></p>
+
+<ol>
+<li>
+<p>Reference a resource in code:</p>
+
+<p><span>&#60;package_name&#62;.</span>R.&#60;resource_type&#62;.&#60;resource_name&#62;</p>
+</li>
+</ol>
+
+<p>For example:</p>
+
+<pre><code>    // Load a background for the current screen from a drawable resource
+
+    getWindow().setBackgroundDrawableResource(R.drawable.background_image) ;</code></pre>
+
+<p>drawable is the resource type and background_image is the resource name</p>
+
+<ol>
+<li>
+<p>In xml</p>
+
+<p>@<span>&#60;package_name&#62;:</span>&#60;resource_type&#62;/&#60;resource_name&#62;</p>
+</li>
+</ol>
+
+<p>For example:</p>
+
+<pre><code>&lt;Button
+ android:layout_width=”fill_parent”
+ android:layout_height=”wrap_content”
+ android:text=”@string/submit” /&gt;</code></pre>
+
+<p><code>&lt;package_name&gt;</code> is the name of the package in which the resource is located (not required when referencing resources from your own package). <code>&lt;resource_type&gt;</code> is the R subclass for the resource type. <code>&lt;resource_name&gt;</code> is either the resource filename without the extension or the android:name attribute value in the XML element (for simple values). To reference a system resource, one would need to include the package name. For example:</p>
+
+<pre><code>android:textColor=”@android:color/secondary_text_dark”</code></pre>
+
+<p><strong>Referencing style attributes</strong></p>
+
+<p>A style attribute resource allows you to reference the value of an attribute in the currently-applied theme.</p>
+
+<p>Syntax:</p>
+
+<pre><code>?[&lt;package_name&gt;:][&lt;resource_type&gt;/]&lt;resource_name&gt;</code></pre>
+
+<p>For Example:</p>
+
+<pre><code>   &lt;EditText id=&quot;text&quot;
+        android:layout_width=&quot;fill_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:textColor=&quot;?android:textColorSecondary&quot;
+        android:text=&quot;@string/hello_world&quot; /&gt;</code></pre>
+
+<p>Because the system resource tool knows that an attribute resource is expected in this context, we do not need to explicitly state the type (which would be ?android:attr/textColorSecondary) — we can exclude the attr type.</p>
+
+<p><strong>Accessing Platform Resources</strong></p>
+
+<p>Android contains a number of standard resources, such as styles, themes, and layouts.You need to add android package name to access these resources. For example:</p>
+
+<pre><code>setListAdapter(new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_list_item_1, myarray));</code></pre>
+
+<p>simple_list_item_1 is a layout resource defined by the platform for items in a ListView.</p>
+
+<h2 id='styles'>Styles</h2>
+
+<p>Now we are all set to define styles.Here we go.</p>
+
+<p>To create a set of styles, save an XML file in the res/values/ directory of your project. The name of the XML file is arbitrary, but it must use the .xml extension and be saved in the res/values/ folder.</p>
+
+<p>The root node of the XML file must be <code>&lt;resources&gt;</code>.</p>
+
+<p>For each style you want to create, add a <code>&lt;style&gt;</code> element to the file with a name that uniquely identifies the style (this attribute is required). Then add an <code>&lt;item&gt;</code> element for each property of that style, with a name that declares the style property and a value to go with it (this attribute is required). The value for the <code>&lt;item&gt;</code> can be a keyword string, a hex color, a reference to another resource type, or other value depending on the style property. For example:</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+    &lt;style name=&quot;MyFontStyle&quot; parent=&quot;@android:style/TextAppearance.Medium&quot;&gt;
+        &lt;item name=&quot;android:layout_width&quot;&gt;fill_parent&lt;/item&gt;
+        &lt;item name=&quot;android:layout_height&quot;&gt;wrap_content&lt;/item&gt;
+        &lt;item name=&quot;android:textColor&quot;&gt;#00FF00&lt;/item&gt;
+        &lt;item name=&quot;android:typeface&quot;&gt;monospace&lt;/item&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;</code></pre>
+
+<p>Each child of the <code>&lt;resources&gt;</code> element is converted into an application resource object at compile-time, which can be referenced by the value in the <code>&lt;style&gt;</code> element’s name attribute. This example style can be referenced from an XML layout as @style/MyFontStyle.</p>
+
+<p>The parent attribute in the <code>&lt;style&gt;</code> element is optional and specifies the resource ID of another style from which this style should inherit properties.</p>
+
+<h2 id='inheritance'>Inheritance</h2>
+
+<p>The parent attribute in the <code>&lt;style&gt;</code> element lets you specify a style from which your style should inherit properties.</p>
+
+<p>1 .Inherit properties from an existing style</p>
+
+<pre><code>&lt;style name=&quot;GreenText&quot; parent=&quot;@android:style/TextAppearance&quot;&gt;
+        &lt;item name=&quot;android:textColor&quot;&gt;#00FF00&lt;/item&gt;
+    &lt;/style&gt;</code></pre>
+
+<ol>
+<li>
+<p>inherit from styles that you’ve created yourself</p>
+<style name='MyFontStyle.Red'>
+          <item name='android:textColor'>#FF0000</item>
+      </style></li>
+</ol>
+
+<p>You can continue inheriting like this as many times as you’d like, by chaining names with periods.This technique for inheritance by chaining together names only works for styles defined by your own resources.</p>
+
+<h2 id='style_properties'>Style Properties</h2>
+
+<p>For a reference of all available style properties, see the R.attr reference. Keep in mind that all View objects don’t accept all the same style attributes, so you should normally refer to the specific View class for supported style properties.</p>
+
+<h2 id='apply_a_theme'>Apply a theme</h2>
+
+<p>You can find this attribute in your AndroidManifest.xml file</p>
+
+<pre><code> &lt;application android:theme=&quot;@style/CustomTheme&quot;&gt;</code></pre>
+
+<p>If you want a theme applied to just one Activity in your application, then add the android:theme attribute to the<code>&lt;activity&gt;</code> tag instead.</p>
+
+<p>As of Android 5.0 (API 21) you can also assign the android:theme for a view. This allows to change the theme for this element and its child elements.</p>
+
+<h2 id='select_a_theme_based_on_platform_version'>Select a theme based on platform version</h2>
+
+<p>To have a theme when the application is running on Android 3.0 (API Level 11) or higher, you can place an alternative declaration for the theme in an XML file in res/values-v11.Similarly for API Level 21 and above use res/values-v21.We&#8217;ll shortly see its great utility in maintaining compatibility.</p>
+
+<p>A list of the standard attributes that you can use in themes can be found at R.styleable.Theme.</p>
+
+<h2 id='using_platform_styles_and_themes'>Using Platform Styles and Themes</h2>
+
+<p>The Android platform provides a large collection of styles and themes that you can use in your applications. You can find a reference of all available styles in the R.style class.</p>
+
+<p>For a better reference to the Android styles and themes, see the following source code:</p>
+
+<ul>
+<li>Android Styles (styles.xml)</li>
+
+<li>Android Themes (themes.xml)</li>
+</ul>
+
+<p>For a reference of available style attributes that you can use to define a style or theme (e.g., “windowBackground” or “textAppearance”), see R.attr or the respective View class for which you are creating a style.</p>
+
+<h2 id='styling_button'>Styling Button</h2>
+
+<p>You can style your button such that it will change appearance depending on its current state.</p>
+
+<p><strong>Custom background</strong> To achieve this your background should be a state list resource.</p>
+
+<p>You can define the state list in an XML file that defines three different images or colors to use for the different button states.</p>
+
+<p>Create a new XML file in the res/drawable/ directory (name it something like button_custom.xml). Insert the following XML:</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:drawable=&quot;@drawable/button_pressed&quot;
+          android:state_pressed=&quot;true&quot; /&gt;
+    &lt;item android:drawable=&quot;@drawable/button_focused&quot;
+          android:state_focused=&quot;true&quot; /&gt;
+    &lt;item android:drawable=&quot;@drawable/button_default&quot; /&gt;
+&lt;/selector&gt;</code></pre>
+
+<p>The order of the <code>&lt;item&gt;</code> elements is important.</p>
+
+<p>Now simply apply the drawable XML file as the button background:</p>
+
+<pre><code>&lt;Button
+    android:id=&quot;@+id/button&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;@string/bSend&quot;
+    android:onClick=&quot;sendMessage&quot;
+    android:background=&quot;@drawable/button_custom&quot;  /&gt;</code></pre>
+
+<h2 id='maintaining_compatibility'>Maintaining Compatibility</h2>
+
+<p>New themes are introduced which provides new features for apps running on higher API levels.So that means while making use of those features your app won&#8217;t run on older versions.Well that is not the case and android provides a nice workaround.</p>
+
+<ol>
+<li>For example: You want to use material theme for API level 21 and above.Create a file themes.xml and put it under values folder.This will be used as default theme for lower API levels.</li>
+</ol>
+
+<p>res/values/themes.xml:</p>
+
+<pre><code>&lt;resources&gt;
+    &lt;style name=&quot;MyTheme&quot; parent=&quot;@android:style/Theme&quot;&gt;
+        &lt;!-- Any customizations for your app running on pre-5.0 devices here --&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;</code></pre>
+
+<p>And make another file with similar name and put it under values-v21 folder.</p>
+
+<p>res/values-v21/themes.xml:</p>
+
+<pre><code>&lt;resources&gt;
+    &lt;style name=&quot;MyTheme&quot; parent=&quot;@android:style/Theme.Material&quot;&gt;
+        &lt;!-- Any customizations for your app running on devices with Theme.Material here --&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;</code></pre>
+
+<p>Finally, in AndroidManifest.xml:</p>
+
+<pre><code>    &lt;application android:name=&quot;MyApplication&quot;
+            android:label=&quot;@string/application_label&quot;
+            android:icon=&quot;@drawable/app_icon&quot;
+            android:hardwareAccelerated=&quot;true&quot;
+            android:theme=&quot;@style/MyTheme&quot;&gt;</code></pre>
+
+<ol>
+<li>Use Support Library</li>
+</ol>
+
+<p>The Android Support Library package is a set of code libraries that provide backward-compatible versions of Android framework APIs as well as features that are only available through the library APIs. Each Support Library is backward-compatible to a specific Android API level.</p>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/02/04/list-of-selected-candidates/">
+            List of selected candidates for Mobile Development Group
+            <small>04 Feb 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/01/12/google-maps-android-api/">
+            Google Maps Android API v2
+            <small>12 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/01/10/adapters/">
+            Adapters
+            <small>10 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+    var disqus_shortname = 'sdsmdgblog';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-58365637-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

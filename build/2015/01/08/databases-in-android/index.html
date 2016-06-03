@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Databases in Android &middot; Mobile Development Group Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p><a href="https://facebook.com/mdgiitr" target="_blank">Mobile Development Group</a> is a student Group at IIT Roorkee that promotes tech based learning pertaining to smartphones and tablets.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+          <!--<a class="sidebar-nav-item" href="/about/">About</a>-->
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    <a class="sidebar-nav-item" href="https://github.com/sdsmdg/sdsmdg.github.io">Blog on GitHub</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Mobile Development Group Blog</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+      <div class="container content">
+        
+        <div class="post">
+  <h1 class="post-title">Databases in Android</h1>
+  <span class="post-date">08 Jan 2015</span>
+  <p>All of you must be done with the first part of the challenge, that is, to complete the form which will be used to take the input data from the user. So now the question you might be thinking will be – how to store this data? Well, it seems there is one very efficient way to do this – Database.</p>
+
+<h2 id='what_is_a_database'>What is a Database?</h2>
+
+<p>With the increasing usability and complexity of the current applications, storing useful data has evolved from being an alternative to a necessity for developers. A database is a collection of information that is organized so that it can easily be accessed, managed, and updated. In computing, the most prevalent approach is the <a href='https://www.google.co.in/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0CB8QFjAA&amp;url=http://en.wikipedia.org/wiki/Relational_database&amp;ei=3YCuVL6uM4OPuATViIKYAw&amp;usg=AFQjCNEnTGY8PBHbHDpPw9B4YR6kdukcLg&amp;sig2=vNAeN_Fy_rv0cunxXXJKMQ&amp;bvm=bv.83339334,d.c2E'>relational database</a>, a tabular database in which data is defined so that it can be reorganized and accessed.</p>
+
+<h2 id='what_is_sqlite_'>What is SQLite ?</h2>
+
+<p>SQLite is an Open Source database. SQLite supports standard relational database features like SQL syntax, transactions and prepared statements. SQLite supports the data types <strong>TEXT</strong> (similar to String in Java), <strong>INTEGER</strong> (similar to long in Java) and <strong>REAL</strong> (similar to double in Java). All other types must be converted into one of these fields before getting saved in the database.</p>
+
+<p>(If you are not familiar with basic SQL syntax, a quick reference can be found <a href='http://www.w3schools.com/sql/'>here</a>)</p>
+
+<h2 id='sqlite_in_android'>SQLite in Android</h2>
+
+<p>SQLite is embedded into every Android device. Using an SQLite database in Android does not require a setup procedure or administration of the database. Access to an SQLite database involves accessing the file system. This can be slow. Therefore it is recommended to perform database operations asynchronously. If your application creates a database, this database is by default saved in the directory <em>DATA/data/APP_NAME/databases/FILENAME</em>. The <strong>android.database</strong> package contains all necessary classes for working with databases. The android.database.sqlite package contains the SQLite specific classes.</p>
+
+<h2 id='the_cursor_class'><a href='http://developer.android.com/reference/android/database/Cursor.html'>The Cursor Class</a></h2>
+
+<p>A query in android returns a Cursor object. A Cursor represents the result of a query and basically points to one row of the query result. This way Android can buffer the query results efficiently; as it does not have to load all data into memory.</p>
+
+<ul>
+<li>To get the number of elements of the resulting query use the <strong>getCount()</strong> method.</li>
+
+<li>To move between individual data rows, you can use the <strong>moveToFirst()</strong> and <strong>moveToNext()</strong> methods.</li>
+
+<li>The <strong>isAfterLast()</strong> method allows to check if the end of the query result has been reached.</li>
+
+<li>A Cursor needs to be closed with the <strong>close()</strong> method call. It is a good practice to close a cursor object once you have retrieved the values for that particular object inside your method.</li>
+</ul>
+
+<h2 id='sqlitedatabase_class'><a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html'>SQLiteDatabase Class</a></h2>
+
+<p>SQLiteDatabase is the base class for working with a SQLite database in Android and provides methods to open, query, update and close the database. An object of this class is used to call methods like insert(), update() delete() rawQuery() query() etc. In addition it provides the execSQL() method, which allows to execute an SQL statement directly.</p>
+
+<h2 id='some_important_methods_of_sqlitedatabase_class_'>Some important methods of SQLiteDatabase Class :</h2>
+
+<ul>
+<li><a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#execSQL%28java.lang.String%29'>execSQL()</a> method:</li>
+</ul>
+
+<p>This method takes an SQL query in the form of a String as parameter and executes it on the current database object. Syntax :</p>
+
+<pre><code>    databaseObject.execSQL(String SQLQuery);</code></pre>
+
+<ul>
+<li><a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#rawQuery%28java.lang.String,%20java.lang.String%5B%5D%29'>rawQuery()</a> method:</li>
+</ul>
+
+<p>The rawQuery method takes an SQL query in it’s original syntax and a String array specifying the ‘Where’ parameters as input. All parameter places should be designated with &#8217;?&#8217;.This method runs the sql query and returns the selected rows in a Cursor object. The following gives the syntax of a rawQuery() call to fetch rows from a table &#8216;books&#8217; with given id:</p>
+
+<pre><code>    Cursor cursor = databaseObject.rawQuery(&quot;SELECT * FROM books 
+WHERE id = ?&quot;,new String[] { id });</code></pre>
+
+<p>The following piece of code allows you to test whether the query returned an empty set and it moves the cursor to the first result (when the set is not empty). This code should be always added while executing rawQueries</p>
+
+<pre><code>    if(cursor!=null)
+    {
+        cursor.moveToFirst();
+    }</code></pre>
+
+<ul>
+<li><a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#query%28java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.String%29'>query()</a> method:</li>
+</ul>
+
+<p>This method is analogous to the rawQuery() method but requires a particular set of values to be passed as parameters. The following gives an example of a query() call. Query method is preferred as compared to rawQuery method as it protects you from SQL injections, builds the query for you and prevents having too many string concatenations.</p>
+
+<p>An example of selecting a row with given id and title from the table &#8216;books&#8217; using query method :</p>
+
+<pre><code>    Cursor cursor = databaseObject.query(books, new String[] { KEY_ID, KEY_TITLE,  }, null, null, null, null, null);</code></pre>
+
+<h2 id='the_contentvalues_class'><a href='http://developer.android.com/reference/android/content/ContentValues.html'>The ContentValues Class</a></h2>
+
+<p>The ContentValues class is used to store a set of values and is required for passing and receiving data variables of our table columns.</p>
+
+<p>Syntax :</p>
+
+<pre><code>    ContentValues values = new ContentValues();
+    values.put(KEY_1, abc );
+    values.put(KEY_2, xyz); </code></pre>
+
+<h2 id='implementation_in_android_app'>Implementation in Android app</h2>
+
+<p>The first step towards creating and upgrading a database in your android app is to create a subclass of the SQLiteOpenHelper class. In the constructor of your subclass you call the super() method of SQLiteOpenHelper, specifying the database name and the current database version. Let us understand the procedure to create an Android database by creating a table books which stores title and author of a book as data along with an id assigned to each. In this class you need to override the following methods to create and update your database:</p>
+
+<ul>
+<li>
+<p><strong>onCreate()</strong> - is called by the framework, if the database is accessed but not yet created. The basic purpose of this method is to create the table with the required data fields using the execSQL method.</p>
+</li>
+
+<li>
+<p><strong>onUpgrade()</strong> - called, if the database version is increased in your application code. This method allows you to update an existing database schema or to drop the existing database and recreate it via the onCreate() method.</p>
+</li>
+</ul>
+
+<p>Now let&#8217;s understand how to implement the methods with an example of a database containing a table storing information regarding books, namely title of the book and its author.</p>
+
+<h3 id='adding_a_book'>Adding a book</h3>
+
+<p>For adding a book we store the values of title and author in a ContentValues object and insert it using the insert method of SQLiteDatabase class.</p>
+
+<pre><code>    ContentValues values = new ContentValues();
+    values.put(&quot;title&quot;, String_Title); 
+    values.put(&quot;author&quot;, String_Author); 
+    db.insert(TABLE_BOOKS, null,   values);</code></pre>
+
+<h3 id='fetching_a_book'>Fetching a book</h3>
+
+<p>The rawQuery method of the SQLiteDatabase Class is invoked to select a book title with given id.</p>
+
+<pre><code>    Cursor cursor = db.rawQuery(&quot;SELECT title, author FROM books 
+WHERE ID = ?&quot;,new String[] { id });</code></pre>
+
+<h3 id='updating_a_book'>Updating a book</h3>
+
+<p>We again use the rawQuery method with proper syntax to update our column values of a book with a given id.</p>
+
+<pre><code>    db.rawQuery(&quot;UPDATE books SET title = ?, author = ?,
+WHERE id = ?,new String[] { title,author,id });</code></pre>
+
+<h3 id='deleting_a_book'>Deleting a book</h3>
+
+<p>The delete method of SQLiteDatabase class is invoked to delete a book with the corresponding id.</p>
+
+<pre><code>    db.delete(TABLE_BOOKS, KEY_ID+&quot; = ?&quot;,  new String[] { BookId});</code></pre>
+
+<p>This completes our discussion of databases and it&#8217;s implementation in android applications. For more resources and detailed explanation you can always refer to the following links:</p>
+
+<p>1) <a href='http://www.vogella.com/tutorials/AndroidSQLite/article.html'>Vogella</a></p>
+
+<p>2) <a href='http://developer.android.com/training/basics/data-storage/databases.html'>Android Developers</a></p>
+
+<p>3) <a href='http://stackoverflow.com/questions/3037767/create-sqlite-database-in-android'>StackOverflow</a></p>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/04/12/Styles/">
+            Styles
+            <small>12 Apr 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/02/04/list-of-selected-candidates/">
+            List of selected candidates for Mobile Development Group
+            <small>04 Feb 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/01/12/google-maps-android-api/">
+            Google Maps Android API v2
+            <small>12 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+    var disqus_shortname = 'sdsmdgblog';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-58365637-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1008 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Mobile Development Group Blog</title>
+ <link href="http://sdsmdg.github.io/atom.xml" rel="self"/>
+ <link href="http://sdsmdg.github.io/"/>
+ <updated>2015-04-12T19:59:05+05:30</updated>
+ <id>http://sdsmdg.github.io</id>
+ <author>
+   <name>Mark Otto</name>
+   <email>markdotto@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Styles</title>
+   <link href="http://sdsmdg.github.io/2015/04/12/Styles/"/>
+   <updated>2015-04-12T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/04/12/Styles</id>
+   <content type="html">&lt;p&gt;While working with android you must have felt the importance as well as difficulties while styling your app.This article will help you understand the basics and utility of &lt;strong&gt;&lt;em&gt;Styles&lt;/em&gt;&lt;/strong&gt; in android.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Style&lt;/strong&gt; in android are the properties pertaining to look and format of a view or a window.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;theme&lt;/strong&gt; is a style applied to an entire Activity or application.&lt;/p&gt;
+
+&lt;h2 id='resources'&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;All the app resources such as static content like layouts, strings etc are placed in res/ directory. res/values/ has XML files that contain simple values, such as strings, styles, colors etc.&lt;/p&gt;
+
+&lt;p&gt;XML resource files in other res/ subdirectories define a single resource based on the XML filename whereas files in the values/ directory describe multiple resources. For a file in this directory, each child of the &lt;code&gt;&amp;lt;resources&amp;gt;&lt;/code&gt; element defines a single resource. For example, a &lt;code&gt;&amp;lt;string&amp;gt;&lt;/code&gt; element creates a R.string resource and a &lt;code&gt;&amp;lt;color&amp;gt;&lt;/code&gt; element creates a R.color resource.&lt;/p&gt;
+
+&lt;p&gt;All these resources are compiled and assigned an interger value in R.java file located at project/build/generated/source/r/debug/package/R.java or simply use ctrl+ N and type R.&lt;/p&gt;
+
+&lt;h2 id='alternative_resources'&gt;Alternative Resources&lt;/h2&gt;
+
+&lt;p&gt;You app runs on devices with different configuration.For example, to optimize the app for different screen sizes and densities you must provide alternative resources.Here is the way to do that:&lt;/p&gt;
+
+&lt;p&gt;Create a new directory in res/ named in the form&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;resources_name&amp;gt;-&amp;lt;config_qualifier&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;resources_name&amp;gt;&lt;/code&gt; is the directory name of the corresponding default resources.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;qualifier&amp;gt;&lt;/code&gt; is a name that specifies an individual configuration for which these resources are to be used.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example: drawable/ and drawable-hdpi/ .The resource files must be named exactly the same as the default resource files.&lt;/p&gt;
+
+&lt;h2 id='accessing_resources'&gt;Accessing Resources&lt;/h2&gt;
+
+&lt;p&gt;So how to access these resources in your project? Let&amp;#8217;s have a look at this.&lt;/p&gt;
+
+&lt;p&gt;When the application is compiled, aapt(Android Asset Packaging Tool) generates the R class, which contains resource IDs for all the resources in project’s res/ directory.&lt;/p&gt;
+
+&lt;p&gt;For each type of resource, there is an R subclass (for example, R.drawable for all drawable resources), and for each resource of that type, there is a static integer (for example, R.drawable.icon). This integer is the resource ID.&lt;/p&gt;
+
+&lt;p&gt;A resource ID is always composed of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The resource type&lt;/li&gt;
+
+&lt;li&gt;The resource name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;There are two ways to access a resource:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Reference a resource in code:&lt;/p&gt;
+
+&lt;p&gt;&lt;span&gt;&amp;#60;package_name&amp;#62;.&lt;/span&gt;R.&amp;#60;resource_type&amp;#62;.&amp;#60;resource_name&amp;#62;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    // Load a background for the current screen from a drawable resource
+
+    getWindow().setBackgroundDrawableResource(R.drawable.background_image) ;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;drawable is the resource type and background_image is the resource name&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;In xml&lt;/p&gt;
+
+&lt;p&gt;@&lt;span&gt;&amp;#60;package_name&amp;#62;:&lt;/span&gt;&amp;#60;resource_type&amp;#62;/&amp;#60;resource_name&amp;#62;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Button
+ android:layout_width=”fill_parent”
+ android:layout_height=”wrap_content”
+ android:text=”@string/submit” /&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;package_name&amp;gt;&lt;/code&gt; is the name of the package in which the resource is located (not required when referencing resources from your own package). &lt;code&gt;&amp;lt;resource_type&amp;gt;&lt;/code&gt; is the R subclass for the resource type. &lt;code&gt;&amp;lt;resource_name&amp;gt;&lt;/code&gt; is either the resource filename without the extension or the android:name attribute value in the XML element (for simple values). To reference a system resource, one would need to include the package name. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;android:textColor=”@android:color/secondary_text_dark”&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Referencing style attributes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A style attribute resource allows you to reference the value of an attribute in the currently-applied theme.&lt;/p&gt;
+
+&lt;p&gt;Syntax:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;?[&amp;lt;package_name&amp;gt;:][&amp;lt;resource_type&amp;gt;/]&amp;lt;resource_name&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   &amp;lt;EditText id=&amp;quot;text&amp;quot;
+        android:layout_width=&amp;quot;fill_parent&amp;quot;
+        android:layout_height=&amp;quot;wrap_content&amp;quot;
+        android:textColor=&amp;quot;?android:textColorSecondary&amp;quot;
+        android:text=&amp;quot;@string/hello_world&amp;quot; /&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Because the system resource tool knows that an attribute resource is expected in this context, we do not need to explicitly state the type (which would be ?android:attr/textColorSecondary) — we can exclude the attr type.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Accessing Platform Resources&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Android contains a number of standard resources, such as styles, themes, and layouts.You need to add android package name to access these resources. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;setListAdapter(new ArrayAdapter&amp;lt;String&amp;gt;(this, android.R.layout.simple_list_item_1, myarray));&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;simple_list_item_1 is a layout resource defined by the platform for items in a ListView.&lt;/p&gt;
+
+&lt;h2 id='styles'&gt;Styles&lt;/h2&gt;
+
+&lt;p&gt;Now we are all set to define styles.Here we go.&lt;/p&gt;
+
+&lt;p&gt;To create a set of styles, save an XML file in the res/values/ directory of your project. The name of the XML file is arbitrary, but it must use the .xml extension and be saved in the res/values/ folder.&lt;/p&gt;
+
+&lt;p&gt;The root node of the XML file must be &lt;code&gt;&amp;lt;resources&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For each style you want to create, add a &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; element to the file with a name that uniquely identifies the style (this attribute is required). Then add an &lt;code&gt;&amp;lt;item&amp;gt;&lt;/code&gt; element for each property of that style, with a name that declares the style property and a value to go with it (this attribute is required). The value for the &lt;code&gt;&amp;lt;item&amp;gt;&lt;/code&gt; can be a keyword string, a hex color, a reference to another resource type, or other value depending on the style property. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+&amp;lt;resources&amp;gt;
+    &amp;lt;style name=&amp;quot;MyFontStyle&amp;quot; parent=&amp;quot;@android:style/TextAppearance.Medium&amp;quot;&amp;gt;
+        &amp;lt;item name=&amp;quot;android:layout_width&amp;quot;&amp;gt;fill_parent&amp;lt;/item&amp;gt;
+        &amp;lt;item name=&amp;quot;android:layout_height&amp;quot;&amp;gt;wrap_content&amp;lt;/item&amp;gt;
+        &amp;lt;item name=&amp;quot;android:textColor&amp;quot;&amp;gt;#00FF00&amp;lt;/item&amp;gt;
+        &amp;lt;item name=&amp;quot;android:typeface&amp;quot;&amp;gt;monospace&amp;lt;/item&amp;gt;
+    &amp;lt;/style&amp;gt;
+&amp;lt;/resources&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Each child of the &lt;code&gt;&amp;lt;resources&amp;gt;&lt;/code&gt; element is converted into an application resource object at compile-time, which can be referenced by the value in the &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; element’s name attribute. This example style can be referenced from an XML layout as @style/MyFontStyle.&lt;/p&gt;
+
+&lt;p&gt;The parent attribute in the &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; element is optional and specifies the resource ID of another style from which this style should inherit properties.&lt;/p&gt;
+
+&lt;h2 id='inheritance'&gt;Inheritance&lt;/h2&gt;
+
+&lt;p&gt;The parent attribute in the &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; element lets you specify a style from which your style should inherit properties.&lt;/p&gt;
+
+&lt;p&gt;1 .Inherit properties from an existing style&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;style name=&amp;quot;GreenText&amp;quot; parent=&amp;quot;@android:style/TextAppearance&amp;quot;&amp;gt;
+        &amp;lt;item name=&amp;quot;android:textColor&amp;quot;&amp;gt;#00FF00&amp;lt;/item&amp;gt;
+    &amp;lt;/style&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;inherit from styles that you’ve created yourself&lt;/p&gt;
+&lt;style name='MyFontStyle.Red'&gt;
+          &lt;item name='android:textColor'&gt;#FF0000&lt;/item&gt;
+      &lt;/style&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can continue inheriting like this as many times as you’d like, by chaining names with periods.This technique for inheritance by chaining together names only works for styles defined by your own resources.&lt;/p&gt;
+
+&lt;h2 id='style_properties'&gt;Style Properties&lt;/h2&gt;
+
+&lt;p&gt;For a reference of all available style properties, see the R.attr reference. Keep in mind that all View objects don’t accept all the same style attributes, so you should normally refer to the specific View class for supported style properties.&lt;/p&gt;
+
+&lt;h2 id='apply_a_theme'&gt;Apply a theme&lt;/h2&gt;
+
+&lt;p&gt;You can find this attribute in your AndroidManifest.xml file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;application android:theme=&amp;quot;@style/CustomTheme&amp;quot;&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want a theme applied to just one Activity in your application, then add the android:theme attribute to the&lt;code&gt;&amp;lt;activity&amp;gt;&lt;/code&gt; tag instead.&lt;/p&gt;
+
+&lt;p&gt;As of Android 5.0 (API 21) you can also assign the android:theme for a view. This allows to change the theme for this element and its child elements.&lt;/p&gt;
+
+&lt;h2 id='select_a_theme_based_on_platform_version'&gt;Select a theme based on platform version&lt;/h2&gt;
+
+&lt;p&gt;To have a theme when the application is running on Android 3.0 (API Level 11) or higher, you can place an alternative declaration for the theme in an XML file in res/values-v11.Similarly for API Level 21 and above use res/values-v21.We&amp;#8217;ll shortly see its great utility in maintaining compatibility.&lt;/p&gt;
+
+&lt;p&gt;A list of the standard attributes that you can use in themes can be found at R.styleable.Theme.&lt;/p&gt;
+
+&lt;h2 id='using_platform_styles_and_themes'&gt;Using Platform Styles and Themes&lt;/h2&gt;
+
+&lt;p&gt;The Android platform provides a large collection of styles and themes that you can use in your applications. You can find a reference of all available styles in the R.style class.&lt;/p&gt;
+
+&lt;p&gt;For a better reference to the Android styles and themes, see the following source code:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android Styles (styles.xml)&lt;/li&gt;
+
+&lt;li&gt;Android Themes (themes.xml)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For a reference of available style attributes that you can use to define a style or theme (e.g., “windowBackground” or “textAppearance”), see R.attr or the respective View class for which you are creating a style.&lt;/p&gt;
+
+&lt;h2 id='styling_button'&gt;Styling Button&lt;/h2&gt;
+
+&lt;p&gt;You can style your button such that it will change appearance depending on its current state.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Custom background&lt;/strong&gt; To achieve this your background should be a state list resource.&lt;/p&gt;
+
+&lt;p&gt;You can define the state list in an XML file that defines three different images or colors to use for the different button states.&lt;/p&gt;
+
+&lt;p&gt;Create a new XML file in the res/drawable/ directory (name it something like button_custom.xml). Insert the following XML:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+&amp;lt;selector xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/button_pressed&amp;quot;
+          android:state_pressed=&amp;quot;true&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/button_focused&amp;quot;
+          android:state_focused=&amp;quot;true&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/button_default&amp;quot; /&amp;gt;
+&amp;lt;/selector&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The order of the &lt;code&gt;&amp;lt;item&amp;gt;&lt;/code&gt; elements is important.&lt;/p&gt;
+
+&lt;p&gt;Now simply apply the drawable XML file as the button background:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Button
+    android:id=&amp;quot;@+id/button&amp;quot;
+    android:layout_width=&amp;quot;wrap_content&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:text=&amp;quot;@string/bSend&amp;quot;
+    android:onClick=&amp;quot;sendMessage&amp;quot;
+    android:background=&amp;quot;@drawable/button_custom&amp;quot;  /&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='maintaining_compatibility'&gt;Maintaining Compatibility&lt;/h2&gt;
+
+&lt;p&gt;New themes are introduced which provides new features for apps running on higher API levels.So that means while making use of those features your app won&amp;#8217;t run on older versions.Well that is not the case and android provides a nice workaround.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;For example: You want to use material theme for API level 21 and above.Create a file themes.xml and put it under values folder.This will be used as default theme for lower API levels.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;res/values/themes.xml:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
+    &amp;lt;style name=&amp;quot;MyTheme&amp;quot; parent=&amp;quot;@android:style/Theme&amp;quot;&amp;gt;
+        &amp;lt;!-- Any customizations for your app running on pre-5.0 devices here --&amp;gt;
+    &amp;lt;/style&amp;gt;
+&amp;lt;/resources&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And make another file with similar name and put it under values-v21 folder.&lt;/p&gt;
+
+&lt;p&gt;res/values-v21/themes.xml:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
+    &amp;lt;style name=&amp;quot;MyTheme&amp;quot; parent=&amp;quot;@android:style/Theme.Material&amp;quot;&amp;gt;
+        &amp;lt;!-- Any customizations for your app running on devices with Theme.Material here --&amp;gt;
+    &amp;lt;/style&amp;gt;
+&amp;lt;/resources&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, in AndroidManifest.xml:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    &amp;lt;application android:name=&amp;quot;MyApplication&amp;quot;
+            android:label=&amp;quot;@string/application_label&amp;quot;
+            android:icon=&amp;quot;@drawable/app_icon&amp;quot;
+            android:hardwareAccelerated=&amp;quot;true&amp;quot;
+            android:theme=&amp;quot;@style/MyTheme&amp;quot;&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Use Support Library&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The Android Support Library package is a set of code libraries that provide backward-compatible versions of Android framework APIs as well as features that are only available through the library APIs. Each Support Library is backward-compatible to a specific Android API level.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>List of selected candidates for Mobile Development Group</title>
+   <link href="http://sdsmdg.github.io/2015/02/04/list-of-selected-candidates/"/>
+   <updated>2015-02-04T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/02/04/list-of-selected-candidates</id>
+   <content type="html">&lt;p&gt;Here is the final list of candidates selected for Mobile Development Group,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Abhishek Sachdeva (ECE)&lt;/li&gt;
+
+&lt;li&gt;Akshay Kumar (META)&lt;/li&gt;
+
+&lt;li&gt;Amit Kumar (ECE)&lt;/li&gt;
+
+&lt;li&gt;Anshul Shah (CSE)&lt;/li&gt;
+
+&lt;li&gt;Karan Desai (EE)&lt;/li&gt;
+
+&lt;li&gt;Manthan Sheth (EE)&lt;/li&gt;
+
+&lt;li&gt;P Kinnera Priya (EE)&lt;/li&gt;
+
+&lt;li&gt;Raghav Chawla (ECE)&lt;/li&gt;
+
+&lt;li&gt;Shubham Kumar (EE)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Congratulations to all.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Google Maps Android API v2</title>
+   <link href="http://sdsmdg.github.io/2015/01/12/google-maps-android-api/"/>
+   <updated>2015-01-12T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/01/12/google-maps-android-api</id>
+   <content type="html">&lt;p&gt;Now that most of you are done with basic task in the challenge, it&amp;#8217;s time to score the bonus points . You need to show the location data that you received from the user on the map. Alternatively, you can just open the map, let the user pinpoint the location and save the latitude &amp;amp; longitude of that location. So how to accomplish this ? Google provides via Google play a library for using Google Maps in your application.&lt;/p&gt;
+
+&lt;h2 id='getting_started'&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;First of all, let&amp;#8217;s see what an API is -&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;API, an abbreviation of application program interface, is a set of routines, protocols, and tools for building software applications. The API specifies how software components should interact and are used when programming graphical user interface (GUI) components.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Before delving into the implementation details we need to make sure we have the appropriate SDKs installed to connect to Google Play Services and get the API key for Google Maps.&lt;/p&gt;
+
+&lt;h4 id='1_installing_required_sdk_components'&gt;1. Installing Required SDK Components&lt;/h4&gt;
+
+&lt;p&gt;Under the Extras section in the Android SDK Manager , check if you have installed the following packages. If not , then download them.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Google Play Services&lt;/li&gt;
+
+&lt;li&gt;Google Repository&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt='Required Installations' src='https://lh4.googleusercontent.com/ASho7RHs3RAAibw4As8phhw2jWtj76grIj7y0SFRcec=s0' /&gt;&lt;/p&gt;
+
+&lt;h4 id='2_setting_up_google_play_services'&gt;2. Setting Up Google Play Services&lt;/h4&gt;
+
+&lt;p&gt;Once these packages have been installed, we must add the Google Play Services dependency to our projects build.gradle file. Open up the build.gradle file present within the module directory. Under the dependencies section add the latest version of the google-play-services library. At the time of writing, this is 6.1.71. You can find out the latest version number of the plugin, as well as many others &lt;a href='http://gradleplease.appspot.com/'&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dependencies {
+    compile fileTree(dir: &amp;#39;libs&amp;#39;, include:[&amp;#39;*.jar&amp;#39;])
+    compile &amp;#39;com.google.android.gms:play-services:6.1.71&amp;#39;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id='3_creating_an_api_key_for_the_app'&gt;3. Creating an API key for the app&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Navigate to &lt;a href='https://console.developers.google.com/project'&gt;https://console.developers.google.com/project&lt;/a&gt;. Click on &amp;#8220;Create Project&amp;#8221;. Enter the project name and id of your choice.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt='CreateProject' src='https://lh4.googleusercontent.com/QSNYokre-9cx3Aq5IvqcI65XRidKOavzhV5sdvJ-uzQ=s0' /&gt; - Click on the &amp;#8220;APIs &amp;amp; auth&amp;#8221; menu on the left, and from the submenu select APIs. From the list of APIs that appear, scroll down and ensure that Google Maps Android API v2 is set to “On”.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='SetOnGoogleMapsAPIv2' src='https://lh4.googleusercontent.com/8_bob1D13HM-0M0achMCxxRLysbt3hzKz4QtFxkSgmI=s0' /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Now under the same menu on the left, select “Credentials” . Under the Public API access heading, click &amp;#8220;Create New Key&amp;#8221;, and then &amp;#8220;Android Key&amp;#8221;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt='CreateNewKey' src='https://lh3.googleusercontent.com/4VGgwQH1LbPsKhLlERSDAan_9lzSX7f-ScQoxpvj4oM=s0' /&gt; - Run the following command in your command prompt to generate your developer certificates SHA1 fingerprint key:&lt;/p&gt;
+
+&lt;h5 id='for_windows_users'&gt;For Windows Users&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code&gt;    keytool -list -v -keystore &amp;quot;%USERPROFILE%\.android\debug.keystore&amp;quot; -alias androiddebugkey -storepass android -keypass android&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id='for_mac_os_or_linux_users'&gt;For Mac OS or Linux Users&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code&gt;    keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take your SHA1 key, and append the apps package name to the end of it, separated by a semicolon. Paste this into the textbox and click Create.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='AddSHA1Key' src='https://lh5.googleusercontent.com/Kg3E1jIFPblpxs1zBTs7lVMfFac-cPYeFCPDGqjpGFo=s0' /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You’ll see an API generated and displayed on the page. Copy the android api key to your clipboard.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt='ReqAPIKey' src='https://lh4.googleusercontent.com/CK2PqCteAaUxNkGnnS7SFZ7xfZHrpsYxUbRVNFd-Vo8=s0' /&gt;&lt;/p&gt;
+
+&lt;h4 id='4_adding_the_api_key_in_our_app'&gt;4. Adding the API key in our app&lt;/h4&gt;
+
+&lt;p&gt;In your project, open up AndroidManifest.xml. Just before the &amp;lt;/application&amp;gt; tag add the following lines of code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;meta-data 
+    android:name=&amp;quot;com.google.android.gms.version&amp;quot; 
+	android:value=
+	&amp;quot;@integer/google_play_services_version&amp;quot; 
+/&amp;gt;
+&amp;lt;meta-data
+   android:name=&amp;quot;com.google.android.maps.v2.API_KEY&amp;quot;
+   android:value=&amp;quot;enter_your_api_key&amp;quot; 
+/&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id='5_adding_a_few_permissions'&gt;5. Adding a few Permissions&lt;/h4&gt;
+
+&lt;p&gt;Now we need to specify the permissions that our app needs. In order to use mapping functionality, we need to add the following permissions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.INTERNET&amp;quot; /&amp;gt;
+&amp;lt;uses-permission android:name=&amp;quot;android.permission.WRITE_EXTERNAL_STORAGE&amp;quot; /&amp;gt;
+&amp;lt;uses-permission android:name=&amp;quot;android.permission.ACCESS_NETWORK_STATE&amp;quot;/&amp;gt;
+&amp;lt;uses-permission android:name=&amp;quot;com.google.android.providers.gsf.permission.READ_GSERVICES&amp;quot; /&amp;gt;
+&amp;lt;uses-permission android:name=&amp;quot;android.permission.ACCESS_COARSE_LOCATION&amp;quot; /&amp;gt;
+&amp;lt;uses-permission android:name=&amp;quot;android.permission.ACCESS_FINE_LOCATION&amp;quot; /&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='google_maps_components'&gt;Google Maps Components&lt;/h2&gt;
+
+&lt;h3 id='the_map_object'&gt;&lt;a href='https://developers.google.com/maps/documentation/android/map'&gt;The map object&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;The key class when working with a map object is the GoogleMap class. GoogleMap models the map object within your application. Within your UI, a map will be represented by either a MapFragment or MapView object.&lt;/p&gt;
+
+&lt;h3 id='mapfragment'&gt;&lt;a href='https://developer.android.com/reference/com/google/android/gms/maps/MapFragment.html'&gt;MapFragment&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;MapFragment, a subclass of the Android Fragment class, allows you to place a map in an Android fragment. MapFragment objects act as containers for the map, and provide access to the GoogleMap object.&lt;/p&gt;
+
+&lt;p&gt;Unlike a View, a Fragment represents a behavior or a portion of user interface in an activity. Refer to the Android documentation on Fragments to learn more.&lt;/p&gt;
+
+&lt;h3 id='mapview'&gt;&lt;a href='http://developer.android.com/reference/com/google/android/gms/maps/MapView.html'&gt;Mapview&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;MapView, a subclass of the Android View class, allows you to place a map in an Android View. Much like a MapFragment, the MapView acts as a container for the map, exposing core map functionality through the GoogleMap object.&lt;/p&gt;
+
+&lt;p&gt;Users of this class must forward all the activity life cycle methods - such as &lt;code&gt;onCreate()&lt;/code&gt;, &lt;code&gt;onDestroy()&lt;/code&gt;, &lt;code&gt;onResume()&lt;/code&gt;, and &lt;code&gt;onPause()&lt;/code&gt; - to the corresponding methods in the MapView class.&lt;/p&gt;
+
+&lt;h3 id='marker'&gt;&lt;a href='https://developer.android.com/reference/com/google/android/gms/maps/model/Marker.html'&gt;Marker&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Markers identify locations on the map. The default marker uses a standard icon, common to the Google Maps look and feel. It&amp;#8217;s possible to change the icon&amp;#8217;s color, image or anchor point via the API. Markers are objects of type Marker, and are added to the map with the &lt;a href='http://developer.android.com/reference/com/google/android/gms/maps/GoogleMap.html#addMarker(com.google.android.gms.maps.model.MarkerOptions'&gt;&lt;code&gt;googleMap.addMarker(markerOptions)&lt;/code&gt;&lt;/a&gt;) method.&lt;/p&gt;
+
+&lt;h2 id='implementation_specifics'&gt;Implementation Specifics&lt;/h2&gt;
+
+&lt;p&gt;Using the below code snippets, try to complete the task.&lt;/p&gt;
+
+&lt;h3 id='adding_a_map_to_the_view'&gt;Adding a Map to the view&lt;/h3&gt;
+
+&lt;p&gt;Open the xml file for the activity in which you want to view the map. Just after the basic layout opening tag add the following code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;fragment
+    android:id=&amp;quot;@+id/map&amp;quot;
+    android:name=
+       &amp;quot;com.google.android.gms.maps.MapFragment&amp;quot;
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;match_parent&amp;quot;
+/&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='initialising_the_map'&gt;Initialising the Map&lt;/h3&gt;
+
+&lt;p&gt;Declare a &lt;a href='https://developer.android.com/reference/com/google/android/gms/maps/GoogleMap.html'&gt;GoogleMap&lt;/a&gt; object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;private GoogleMap googleMap ;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now in the OnCreate( ) method of the activity, use the below code to initialise the GoogleMap instance.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;googleMap = ((MapFragment) getFragmentManager()
+.findFragmentById(R.id.map)).getMap();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='setting_a_listener_on_map_click'&gt;Setting a listener on Map Click&lt;/h3&gt;
+
+&lt;p&gt;Remember to save the data for the clicked location. This also needs to be done in the OnCreate( ) method of the activity.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;googleMap.setOnMapClickListener(new OnMapClickListener() {
+         @Override
+        public void onMapClick(LatLng latLng) {
+			 // add the code for saving the data 
+			 // and displaying a marker
+        }
+    });&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='adding_a_marker'&gt;Adding a Marker&lt;/h3&gt;
+
+&lt;p&gt;The marker is added on the location whose latitude and location are x and y respectively.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(x, y))
+                        .title(&amp;quot;Marker&amp;quot;)
+                        .draggable(true)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='changing_map_type'&gt;Changing Map Type&lt;/h2&gt;
+
+&lt;p&gt;A map&amp;#8217;s type governs the overall representation of the map. The Google Maps Android API offers four types of maps, as well as an option to have no map at all:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Normal&lt;/strong&gt; : Typical road map. Roads, some man-made features, and important natural features such as rivers are shown. Road and feature labels are also visible.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Hybrid&lt;/strong&gt; : Satellite photograph data with road maps added. Road and feature labels are also visible.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Satellite&lt;/strong&gt; : Satellite photograph data. Road and feature labels are not visible.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Terrain&lt;/strong&gt; : Topographic data. The map includes colors, contour lines and labels, and perspective shading. Some roads and labels are also visible.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; : No tiles. The map will be rendered as an empty grid with no tiles loaded.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt='MapTypes' src='https://lh5.googleusercontent.com/3RcPnvhno5u3hNLdB3VUgMfMOq1FESP4ztLquP5bxdY=s0' /&gt;&lt;/p&gt;
+
+&lt;p&gt;The map type can be changed by using the &lt;a href='http://developer.android.com/reference/com/google/android/gms/maps/GoogleMap.html#setMapType(int'&gt;&lt;code&gt;googleMap.setMapType()&lt;/code&gt;&lt;/a&gt;) method. Here the &lt;code&gt;googleMap&lt;/code&gt; is an instance of GoogleMap class.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+googleMap.setMapType(GoogleMap.MAP_TYPE_NONE);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='conclusion'&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This completes our discussion on Google Maps Android API v2 . Feel free to post any sort of doubts in the comments below or on our Facebook Group. For more resources and detailed explanation you can always refer to the following links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://www.vogella.com/tutorials/AndroidGoogleMaps/article.html'&gt;Vogella&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www.androidhive.info/2013/08/android-working-with-google-maps-v2/'&gt;Android Hive&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='https://developers.google.com/maps/documentation/android/'&gt;Google Developers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Adapters</title>
+   <link href="http://sdsmdg.github.io/2015/01/10/adapters/"/>
+   <updated>2015-01-10T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/01/10/adapters</id>
+   <content type="html">&lt;h2 id='adapters_in_android'&gt;Adapters in Android&lt;/h2&gt;
+
+&lt;p&gt;An Adapter object acts as a bridge between an AdapterView and the underlying data for that view. The Adapter provides access to the data items. The Adapter is also responsible for making a View for each item in the data set.&lt;/p&gt;
+
+&lt;p&gt;Regarding the challenge, we have to display the list of criminals. This can be done using ListView and ListFragment. We need an adapter to bind the data fetched from the database to corresponding row in the list. On clicking rows of listview, we need to show the details of the corresponding criminal. This can be done by adding &lt;code&gt;setOnClickListner()&lt;/code&gt; to row item in the list.&lt;/p&gt;
+
+&lt;h2 id='listfragment'&gt;ListFragment&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/guide/components/fragments.html'&gt;Fragment&lt;/a&gt; is a piece of activity&amp;#8217;s UI. We prefer to create the user interface using fragments and add these fragments to activity so that they can be reused. It&amp;#8217;s lifecycle is similar to that of the activity.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/app/ListFragment.html'&gt;ListFragment&lt;/a&gt; displays a list of items by binding to a data source such as an array or Cursor, and exposes event handlers when the user selects an item.&lt;/p&gt;
+
+&lt;p&gt;It hosts a ListView object that can be bound to different data sources, typically either an array or a Cursor holding query results.&lt;/p&gt;
+
+&lt;h3 id='how_do_we_add_fragment_to_activity'&gt;How do we add Fragment to Activity?&lt;/h3&gt;
+
+&lt;p&gt;The following snippet illustrates how do we add the fragment to activity. This should be done in the &lt;code&gt;onCreate&lt;/code&gt; method of activity.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fManager = getSupportFragmentManager();
+fTranslation = fManager.beginTransaction();
+exampleListFragment = new ExampleListFragment(); 	
+fTranslation.replace(R.id.list_fragment,exampleListFragment);
+fTranslation.commit();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The exampleListFragment is declared as :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class ExampleListFragment extends ListFragment{
+
+ListView listview;
+List&amp;lt;RowItem&amp;gt; rowlist;
+    
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
+View v = inflater.inflate(R.layout.list_fragment,
+			container, false);
+listview = (ListView)v.findViewById(android.R.id.list);
+
+//data to be binded with list
+rowlist = new ArrayList&amp;lt;RowItem&amp;gt;(); 
+
+rowlist.add (new RowItem(.....));
+...
+... //adding items to rowlist
+
+//adding adapter to listview    
+list.setAdapter(new RowListAdapter(context, result));
+
+	//returns ListFragment ViewGroup  
+	return v;
+ }
+
+}	&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/ListView.html'&gt;ListView&lt;/a&gt; is a &lt;code&gt;ViewGroup&lt;/code&gt; which shows list of scrollable items. (&lt;a href='http://developer.android.com/reference/android/view/ViewGroup.html'&gt;ViewGroup&lt;/a&gt; is a special view that can contain other views. The &lt;code&gt;ViewGroup&lt;/code&gt; is the base class for layouts and views containers.)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://www.airpair.com/android/list-fragment-android-studio'&gt;Here&lt;/a&gt; is quick tutorial on &lt;code&gt;ListFragment&lt;/code&gt; using AndroidStudio.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id='adapter'&gt;Adapter&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/Adapter.html'&gt;Adapter&lt;/a&gt; in android acts as bridge between an &lt;code&gt;AdapterView&lt;/code&gt; and the underlying data for that view. The Adapter provides access to the data items. The Adapter is also responsible for making a View for each item in the data set.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='enter image description here' src='http://www.edureka.co/blog/wp-content/uploads/2013/03/adapters-1.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;Data can be information obtained from database or server or it can be already present in program. There are many subclasses of Adapter, for example &lt;a href='http://developer.android.com/reference/android/widget/CursorAdapter.html'&gt;CursorAdapter&lt;/a&gt;, &lt;a href='http://developer.android.com/reference/android/widget/ArrayAdapter.html'&gt;ArrayAdapter&lt;/a&gt; etc.&lt;/p&gt;
+
+&lt;h2 id='baseadapter'&gt;BaseAdapter&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/BaseAdapter.html'&gt;BaseAdapter&lt;/a&gt; is an abstract class which implements ListAdapter and SpinnerAdapter Interface. Hence, we may use it for implementing both &lt;a href='http://developer.android.com/reference/android/widget/ListView.html'&gt;ListView&lt;/a&gt; and &lt;a href='http://developer.android.com/guide/topics/ui/controls/spinner.html'&gt;Spinner&lt;/a&gt;. Following methods are necessary to implement for creating a subclass of BaseAdapter:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;getCount()&lt;/code&gt; : &lt;code&gt;int&lt;/code&gt; returns number of rows in list&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;getItem(int position)&lt;/code&gt;: &lt;code&gt;Object&lt;/code&gt; returns Item object&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;getItemId(int position)&lt;/code&gt;: &lt;code&gt;long&lt;/code&gt; returns the id of the item at position &lt;code&gt;position&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;getView(int arg0, View arg1, ViewGroup arg2)&lt;/code&gt;: &lt;code&gt;View&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='how_getview_works'&gt;How getView() works?&lt;/h3&gt;
+
+&lt;p&gt;Adapters call the &lt;code&gt;getView()&lt;/code&gt; method which returns a view for each item within the adapter view. The layout format and the corresponding data for an item within the adapter view is set in the &lt;code&gt;getView()&lt;/code&gt; method. Due to performance reasons, &lt;code&gt;getView()&lt;/code&gt; doesn&amp;#8217;t returns a new View object every time it is called. So what Android does is that it recycles the views and reuses the view that goes out of focus.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Visual representation of this recycle process:' src='http://www.edureka.co/blog/wp-content/uploads/2013/03/021-1.png' /&gt;&lt;/p&gt;
+
+&lt;h2 id='cursoradapter'&gt;CursorAdapter&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/database/Cursor.html'&gt;Cursor&lt;/a&gt; is an interface which provides random read-write access to result set returned by read write query. This interface has been explained in our previous post on &lt;a href='https://mobile.sdslabs.co/2015/01/08/databases-in-android/'&gt;databases in android&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/CursorAdapter.html'&gt;CursorAdapter&lt;/a&gt; is a subclass of BaseAdapter. It is used to bind cursor data qureied from database to AdapterView. Cursor adapter has following abstract methods,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;newView(Context context, Cursor cursor, ViewGroup parent)&lt;/code&gt;: &lt;code&gt;View&lt;/code&gt; This method creates new AdapterView to hold data.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bindView(View view, Context context, Cursor cursor)&lt;/code&gt;: &lt;code&gt;void&lt;/code&gt; In this method CursorAdapter just elements to list&amp;#8217;s view.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html'&gt;SimpleCursorAdapter&lt;/a&gt; is subclass of CursorAdapter. If we use it, we don&amp;#8217;t have to create separate Adapter&amp;#8217;s subclass. Here is a sample code that shows how do we attach this to listview.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    // The desired columns to be bound    
+    String[] columns = new String[] { People.NAME, People.NUMBER };
+
+    // XML defined views which the data will be bound to
+    int[] to = new int[] { R.id.name_entry, R.id.number_entry };
+
+    // Create the adapter using the cursor pointing to the desired data as well as the layout information
+    SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.list_example_entry, cursor, columns, to);
+
+    // Set this adapter as your list&amp;#39;s adapter
+    this.setListAdapter(mAdapter);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='array_adapter'&gt;Array Adapter&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/ArrayAdapter.html'&gt;Array Adapter&lt;/a&gt; is subclass of BaseAdapter. It is used to bind data in arrayList to AdapterView.&lt;/p&gt;
+
+&lt;p&gt;In this type of adapter, we pass List, context of activity and layout of entry as attribute, but layout of entry can be only those which are already present in the library. We associate an adapter with View.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id='custom_adapters_for_listview'&gt;Custom Adapters for ListView&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view'&gt;Custom Adapter&lt;/a&gt; is used when we want to design and add more UI components to an item of ListView or GridView. We build this class on our own. This class extends Adapter or Adapter&amp;#8217;s subclass. In the getView() method of class, we may set custom content View.&lt;/p&gt;
+&lt;center&gt; &lt;img height='500' src='http://i-cdn.phonearena.com/images/articles/126045-image/Androids-new-clothes.jpg' /&gt; &lt;/center&gt;
+&lt;p&gt;&lt;em&gt;Image: ListView using CustomAdapter&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In general, CustomArrayAdapter overrides the following methods of ArrayAdapter,&lt;/p&gt;
+
+&lt;p&gt;Example code: getView()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        View entryView = convertView;
+        if(convertView == null){
+            LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            entryView = layoutInflater.inflate(R.layout.entry_item, parent,false);
+        }
+	
+        TextView entryUser =(TextView)entryView.findViewById(R.id.entry_user);
+        //and so on, add all UI components 
+        //setOnClickListener events to button components
+
+        return entryView;
+    }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similarly, we can create CustomCursorAdapter by extending CursorAdapter. SubClass of CursorAdapter must have to override the following methods of CursorAdapter. Here is sample code for &lt;code&gt;newView()&lt;/code&gt; and &lt;code&gt;bindView()&lt;/code&gt; abstract methods of CursorAdapter.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     /**
+     *Makes a new view to hold the data pointed to by cursor.
+     */
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent)
+    {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View newView = inflater.inflate(
+                android.R.layout.simple_list_item_1, parent, false);
+        return newView;
+    } 
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor)
+    {
+        TextView txtView = (TextView)view.findViewById(android.R.id.text1);
+        txtView.setText(cursor.getString(
+        cursor.getColumnIndex(&amp;quot;person&amp;quot;)));
+    }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href='http://thinkandroid.wordpress.com/2010/01/11/custom-cursoradapters/'&gt;Here&lt;/a&gt; is a quick tutorial on CustomCursorAdapter.&lt;/p&gt;
+
+&lt;p&gt;This concludes the post on adapters. Hope you will now be able to implement lists in your app.&lt;/p&gt;
+
+&lt;p&gt;Keep watching for our next post on google maps. Till then goodbye and happy coding !&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Databases in Android</title>
+   <link href="http://sdsmdg.github.io/2015/01/08/databases-in-android/"/>
+   <updated>2015-01-08T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/01/08/databases-in-android</id>
+   <content type="html">&lt;p&gt;All of you must be done with the first part of the challenge, that is, to complete the form which will be used to take the input data from the user. So now the question you might be thinking will be – how to store this data? Well, it seems there is one very efficient way to do this – Database.&lt;/p&gt;
+
+&lt;h2 id='what_is_a_database'&gt;What is a Database?&lt;/h2&gt;
+
+&lt;p&gt;With the increasing usability and complexity of the current applications, storing useful data has evolved from being an alternative to a necessity for developers. A database is a collection of information that is organized so that it can easily be accessed, managed, and updated. In computing, the most prevalent approach is the &lt;a href='https://www.google.co.in/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=1&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=0CB8QFjAA&amp;amp;url=http://en.wikipedia.org/wiki/Relational_database&amp;amp;ei=3YCuVL6uM4OPuATViIKYAw&amp;amp;usg=AFQjCNEnTGY8PBHbHDpPw9B4YR6kdukcLg&amp;amp;sig2=vNAeN_Fy_rv0cunxXXJKMQ&amp;amp;bvm=bv.83339334,d.c2E'&gt;relational database&lt;/a&gt;, a tabular database in which data is defined so that it can be reorganized and accessed.&lt;/p&gt;
+
+&lt;h2 id='what_is_sqlite_'&gt;What is SQLite ?&lt;/h2&gt;
+
+&lt;p&gt;SQLite is an Open Source database. SQLite supports standard relational database features like SQL syntax, transactions and prepared statements. SQLite supports the data types &lt;strong&gt;TEXT&lt;/strong&gt; (similar to String in Java), &lt;strong&gt;INTEGER&lt;/strong&gt; (similar to long in Java) and &lt;strong&gt;REAL&lt;/strong&gt; (similar to double in Java). All other types must be converted into one of these fields before getting saved in the database.&lt;/p&gt;
+
+&lt;p&gt;(If you are not familiar with basic SQL syntax, a quick reference can be found &lt;a href='http://www.w3schools.com/sql/'&gt;here&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id='sqlite_in_android'&gt;SQLite in Android&lt;/h2&gt;
+
+&lt;p&gt;SQLite is embedded into every Android device. Using an SQLite database in Android does not require a setup procedure or administration of the database. Access to an SQLite database involves accessing the file system. This can be slow. Therefore it is recommended to perform database operations asynchronously. If your application creates a database, this database is by default saved in the directory &lt;em&gt;DATA/data/APP_NAME/databases/FILENAME&lt;/em&gt;. The &lt;strong&gt;android.database&lt;/strong&gt; package contains all necessary classes for working with databases. The android.database.sqlite package contains the SQLite specific classes.&lt;/p&gt;
+
+&lt;h2 id='the_cursor_class'&gt;&lt;a href='http://developer.android.com/reference/android/database/Cursor.html'&gt;The Cursor Class&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;A query in android returns a Cursor object. A Cursor represents the result of a query and basically points to one row of the query result. This way Android can buffer the query results efficiently; as it does not have to load all data into memory.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To get the number of elements of the resulting query use the &lt;strong&gt;getCount()&lt;/strong&gt; method.&lt;/li&gt;
+
+&lt;li&gt;To move between individual data rows, you can use the &lt;strong&gt;moveToFirst()&lt;/strong&gt; and &lt;strong&gt;moveToNext()&lt;/strong&gt; methods.&lt;/li&gt;
+
+&lt;li&gt;The &lt;strong&gt;isAfterLast()&lt;/strong&gt; method allows to check if the end of the query result has been reached.&lt;/li&gt;
+
+&lt;li&gt;A Cursor needs to be closed with the &lt;strong&gt;close()&lt;/strong&gt; method call. It is a good practice to close a cursor object once you have retrieved the values for that particular object inside your method.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='sqlitedatabase_class'&gt;&lt;a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html'&gt;SQLiteDatabase Class&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;SQLiteDatabase is the base class for working with a SQLite database in Android and provides methods to open, query, update and close the database. An object of this class is used to call methods like insert(), update() delete() rawQuery() query() etc. In addition it provides the execSQL() method, which allows to execute an SQL statement directly.&lt;/p&gt;
+
+&lt;h2 id='some_important_methods_of_sqlitedatabase_class_'&gt;Some important methods of SQLiteDatabase Class :&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#execSQL%28java.lang.String%29'&gt;execSQL()&lt;/a&gt; method:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This method takes an SQL query in the form of a String as parameter and executes it on the current database object. Syntax :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    databaseObject.execSQL(String SQLQuery);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#rawQuery%28java.lang.String,%20java.lang.String%5B%5D%29'&gt;rawQuery()&lt;/a&gt; method:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The rawQuery method takes an SQL query in it’s original syntax and a String array specifying the ‘Where’ parameters as input. All parameter places should be designated with &amp;#8217;?&amp;#8217;.This method runs the sql query and returns the selected rows in a Cursor object. The following gives the syntax of a rawQuery() call to fetch rows from a table &amp;#8216;books&amp;#8217; with given id:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Cursor cursor = databaseObject.rawQuery(&amp;quot;SELECT * FROM books 
+WHERE id = ?&amp;quot;,new String[] { id });&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The following piece of code allows you to test whether the query returned an empty set and it moves the cursor to the first result (when the set is not empty). This code should be always added while executing rawQueries&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    if(cursor!=null)
+    {
+        cursor.moveToFirst();
+    }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#query%28java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.String%29'&gt;query()&lt;/a&gt; method:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This method is analogous to the rawQuery() method but requires a particular set of values to be passed as parameters. The following gives an example of a query() call. Query method is preferred as compared to rawQuery method as it protects you from SQL injections, builds the query for you and prevents having too many string concatenations.&lt;/p&gt;
+
+&lt;p&gt;An example of selecting a row with given id and title from the table &amp;#8216;books&amp;#8217; using query method :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Cursor cursor = databaseObject.query(books, new String[] { KEY_ID, KEY_TITLE,  }, null, null, null, null, null);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='the_contentvalues_class'&gt;&lt;a href='http://developer.android.com/reference/android/content/ContentValues.html'&gt;The ContentValues Class&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The ContentValues class is used to store a set of values and is required for passing and receiving data variables of our table columns.&lt;/p&gt;
+
+&lt;p&gt;Syntax :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    ContentValues values = new ContentValues();
+    values.put(KEY_1, abc );
+    values.put(KEY_2, xyz); &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='implementation_in_android_app'&gt;Implementation in Android app&lt;/h2&gt;
+
+&lt;p&gt;The first step towards creating and upgrading a database in your android app is to create a subclass of the SQLiteOpenHelper class. In the constructor of your subclass you call the super() method of SQLiteOpenHelper, specifying the database name and the current database version. Let us understand the procedure to create an Android database by creating a table books which stores title and author of a book as data along with an id assigned to each. In this class you need to override the following methods to create and update your database:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;onCreate()&lt;/strong&gt; - is called by the framework, if the database is accessed but not yet created. The basic purpose of this method is to create the table with the required data fields using the execSQL method.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;onUpgrade()&lt;/strong&gt; - called, if the database version is increased in your application code. This method allows you to update an existing database schema or to drop the existing database and recreate it via the onCreate() method.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now let&amp;#8217;s understand how to implement the methods with an example of a database containing a table storing information regarding books, namely title of the book and its author.&lt;/p&gt;
+
+&lt;h3 id='adding_a_book'&gt;Adding a book&lt;/h3&gt;
+
+&lt;p&gt;For adding a book we store the values of title and author in a ContentValues object and insert it using the insert method of SQLiteDatabase class.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    ContentValues values = new ContentValues();
+    values.put(&amp;quot;title&amp;quot;, String_Title); 
+    values.put(&amp;quot;author&amp;quot;, String_Author); 
+    db.insert(TABLE_BOOKS, null,   values);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='fetching_a_book'&gt;Fetching a book&lt;/h3&gt;
+
+&lt;p&gt;The rawQuery method of the SQLiteDatabase Class is invoked to select a book title with given id.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Cursor cursor = db.rawQuery(&amp;quot;SELECT title, author FROM books 
+WHERE ID = ?&amp;quot;,new String[] { id });&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='updating_a_book'&gt;Updating a book&lt;/h3&gt;
+
+&lt;p&gt;We again use the rawQuery method with proper syntax to update our column values of a book with a given id.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    db.rawQuery(&amp;quot;UPDATE books SET title = ?, author = ?,
+WHERE id = ?,new String[] { title,author,id });&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='deleting_a_book'&gt;Deleting a book&lt;/h3&gt;
+
+&lt;p&gt;The delete method of SQLiteDatabase class is invoked to delete a book with the corresponding id.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    db.delete(TABLE_BOOKS, KEY_ID+&amp;quot; = ?&amp;quot;,  new String[] { BookId});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This completes our discussion of databases and it&amp;#8217;s implementation in android applications. For more resources and detailed explanation you can always refer to the following links:&lt;/p&gt;
+
+&lt;p&gt;1) &lt;a href='http://www.vogella.com/tutorials/AndroidSQLite/article.html'&gt;Vogella&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2) &lt;a href='http://developer.android.com/training/basics/data-storage/databases.html'&gt;Android Developers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;3) &lt;a href='http://stackoverflow.com/questions/3037767/create-sqlite-database-in-android'&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Starting with the challenge</title>
+   <link href="http://sdsmdg.github.io/2015/01/06/starting-with-the-challenge/"/>
+   <updated>2015-01-06T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/01/06/starting-with-the-challenge</id>
+   <content type="html">&lt;h2 id='installation_of_android_studio'&gt;Installation of Android Studio&lt;/h2&gt;
+
+&lt;p&gt;Android Studio is a latest and most widely accepted IDE designed by Google itself and quickly replacing Eclipse which was used earlier. If you want to develop apps in android then it is highly recommended to use Android Studio instead of Eclipse. Details for download and usage of android studio can be found &lt;a href='http://developer.android.com/tools/studio/index.html'&gt;here&lt;/a&gt; as well as in the following video:&lt;/p&gt;
+&lt;center&gt; &lt;iframe allowfullscreen='allowfullscreen' frameborder='0' height='315' src='//www.youtube.com/embed/zEsDwzjPJ5c' width='560'&gt; &lt;/iframe&gt; &lt;/center&gt;
+&lt;h2 id='quick_start'&gt;Quick Start&lt;/h2&gt;
+
+&lt;p&gt;A typical native android application is written using XML for the frontend (the User Interface) and JAVA for the backend.&lt;/p&gt;
+
+&lt;h3 id='java'&gt;JAVA&lt;/h3&gt;
+
+&lt;p&gt;All the programming part in android development is done using JAVA. Although its a great advantage, if you know a thing or two about programming in Java, but even if you know any object oriented programming language, then it will not be much difficult to relate to the concepts used during development.&lt;/p&gt;
+
+&lt;p&gt;Those who are familiar with other programming languages like C,C++ etc might need to understand a few concepts of JAVA which are not so commonly used in C and C++. Some of them have been mentioned here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Basic understanding of OOP concepts - classes, functions, meaning of public/private/protected, inheritance etc.&lt;/li&gt;
+
+&lt;li&gt;Use of interfaces&lt;/li&gt;
+
+&lt;li&gt;Types of identifiers such as static, abstract, final etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='xml'&gt;XML&lt;/h3&gt;
+
+&lt;p&gt;This is used to build the app&amp;#8217;s user interface. All user interface elements in an Android app are built using View and ViewGroup objects. A View is an object that draws something on the screen that the user can interact with. A ViewGroup is an object that holds other View (and ViewGroup) objects in order to define the layout of the interface.&lt;/p&gt;
+
+&lt;p&gt;The Android developer kit provides an elegant and easy-to-use graphic interface to work with these components and avoid XML, and thus as a beginner, you can directly use this for your app. But as you move on, working with XML provides greater control over the design of the elements.&lt;/p&gt;
+
+&lt;p&gt;Here is a list of basic UI elements which are used very often while developing android apps :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/TextView.html'&gt;TextView&lt;/a&gt; : Displays text to the user and optionally allows them to edit it.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;a href='http://developer.android.com/guide/topics/ui/controls/text.html'&gt;EditText&lt;/a&gt; : EditText is a thin veneer over TextView that configures itself to be editable.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;a href='http://developer.android.com/guide/topics/ui/controls/button.html'&gt;Button&lt;/a&gt; : A button consists of text or an icon (or both text and an icon) that communicates what action occurs when the user touches it.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;a href='http://developer.android.com/guide/topics/ui/controls/spinner.html'&gt;Spinner&lt;/a&gt; : Select one value from a set. In the default state, a spinner shows its currently selected value.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;a href='http://developer.android.com/guide/topics/ui/layout/listview.html'&gt;ListView&lt;/a&gt; : ListView is a view group that displays a list of scrollable items.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;a href='http://developer.android.com/reference/android/widget/ImageView.html'&gt;ImageView&lt;/a&gt; : Displays an arbitrary image, such as an icon. The ImageView class can load images from various sources&lt;/p&gt;
+
+&lt;p&gt;Now the first task as a part of your problem statement is to develop a form wherein you take the details of a new criminal as input. First of all, you will need a layout(Relative or Linear) to place the rest of the elements in it. Then you can use the EditText element to input his name, address, area in which he lives, and other information. TextView can be used to indicate these fields to the user corresponding to these EditTexts. Explore other elements as well and see if you can ask for more information using them. Finally have a submit and a clear button to store the record and clear the form respectively.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='running_the_app'&gt;Running the app&lt;/h3&gt;
+
+&lt;p&gt;An android application can run either on your device or in the emulator that comes bundled with the SDK. Since the emulators can be slow, it is always recommended to use an actual device. &lt;a href='http://developer.android.com/training/basics/firstapp/running-app.html'&gt;This&lt;/a&gt; link contains detailed explanation for setting up your device/emulator for testing.&lt;/p&gt;
+&lt;br /&gt;
+&lt;p&gt;So that&amp;#8217;s it from our side in this blog. In case of any problem you can visit the official android website, which has a huge documentation on almost every topic related to developing Android Studio, including Tools, downloadable Material, Designs, APIs ,etc. You can also post your doubts on this blog or in our &lt;a href='http://fb.com/groups/sdsmobiledevelopment'&gt;facebook group&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We will soon be back with the next blog in the android development series. Till then goodbye and happy coding !&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Droid Wars</title>
+   <link href="http://sdsmdg.github.io/2015/01/02/droid-wars/"/>
+   <updated>2015-01-02T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2015/01/02/droid-wars</id>
+   <content type="html">&lt;h2 id='problem_statement'&gt;Problem Statement&lt;/h2&gt;
+
+&lt;p&gt;With crime in Gotham continuously on the rise, Batman is worried that his Utility Belt may not be enough anymore. So he needs you to create a “Bat-App” for him that will help him in his endeavours. He needs to maintain a record of all the wrongdoers spreading havoc in his city. This app should have the following screens :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Home Screen&lt;/strong&gt; This screen has 2 buttons - New record and View Records. Clicking on New record opens up a screen to create a new record and clicking on view existing records opens a list of records stored.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;New Record&lt;/strong&gt; When the user clicks on the new record button he will be taken to a new screen which will have a form asking the user for various inputs like criminal&amp;#8217;s name , age , gender , crimes and last known/seen location. There will also be a button to save these records in a database..&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;View Records&lt;/strong&gt; This screen will consist of a list of all the records stored locally. On clicking any item, the details of that particular criminal must be shown in the Details Screen&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Details&lt;/strong&gt; Here is where the details of criminals that are stored in the database must be shown.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='bonus_points_for'&gt;Bonus Points For&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Elegant User Interface&lt;/li&gt;
+
+&lt;li&gt;If images of each criminal are stored and displayed&lt;/li&gt;
+
+&lt;li&gt;Clicking on the last known location shows it on a map. You can take the latitude &amp;amp; longitude of the location from the user at the time of filling a new entry. A better option can be to just open the map, let the user pinpoint the location and save the latitude &amp;amp; longitude of that location. ( Refer Maps SDK for Android, Google Maps Android API v2 - Tutorial )&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='points_to_remember'&gt;Points to Remember&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Submit your entries latest by 20th January, 2015 to sdsmobilelabs@gmail.com. Your submission must include the zip file containing the source code and the apk file. Remember to write your name and contact information in the mail.&lt;/li&gt;
+
+&lt;li&gt;In case you run into some problem or don&amp;#8217;t know where to start, we have written a short blog that may help you.&lt;/li&gt;
+
+&lt;li&gt;Join our facebook group for further queries and updates.&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Introduction To Android Development</title>
+   <link href="http://sdsmdg.github.io/2014/12/31/introduction-to-android-development/"/>
+   <updated>2014-12-31T00:00:00+05:30</updated>
+   <id>http://sdsmdg.github.io/2014/12/31/introduction-to-android-development</id>
+   <content type="html">&lt;h2 id='why_develop_for_android_'&gt;Why Develop For Android ?&lt;/h2&gt;
+
+&lt;p&gt;With over 1 billion Android devices already activated, Android represents an incredible opportunity for developers.&lt;/p&gt;
+
+&lt;p&gt;As Android continues to grow beyond smartphones, it will become the brains behind invisible, ubiquitous cloud-connected computing. This is an introductory guide that will help you build awesome apps for smartphones and tablets today, and propel you towards exciting opportunities in Android&amp;#8217;s future.&lt;/p&gt;
+
+&lt;h2 id='resources'&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;There are many resources online that can help you getting started. Here we are listing a few that will provide you an introduction to this exciting world :&lt;/p&gt;
+
+&lt;h3 id='video_tutorials'&gt;Video Tutorials&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='https://www.udacity.com/course/ud853'&gt;Developing Android Apps&lt;/a&gt; - Created by Google and offered on Udacity, this course is a nice stepping stone if you have prior programming experience.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='https://www.udacity.com/course/ud849'&gt;UX Design For Mobile&lt;/a&gt; - Another one by Google, this course will help you understand the most important and immediately useful techniques and approaches used by great mobile UX designers&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='https://www.youtube.com/user/androiddevelopers/featured'&gt;Android Developers Youtube Channel&lt;/a&gt; - Videos containing demos, tutorials, and anything else related to Android development.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='documentation'&gt;Documentation&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://developer.android.com/training/index.html'&gt;Official Android Developer Documentation&lt;/a&gt; - Highly recommended and something every android developer must refer to, weather a noob or a pro. Contains beginner level tutorials as well as referance of all classes for more advanced developers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='blogs'&gt;Blogs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://www.vogella.com/tutorials/android.html'&gt;Vogella Android Tutorials&lt;/a&gt; - Short and precise tutorials about development for Android: tools installation, debugging and using various features.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www.androidhive.info/'&gt;Android Hive&lt;/a&gt; - Nice collection of tutorials, tips and hacks for android and game developers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='question_answer_forum'&gt;Question Answer Forum&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://www.stackoverflow.com/'&gt;Stack Overflow&lt;/a&gt; - Q/A forum for programmers. Most probably you will find the answer to your problem here. If not&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='https://www.google.com'&gt;There is always Google !&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+
+</feed>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Google Maps Android API v2 &middot; Mobile Development Group Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-08">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p><a href="https://facebook.com/mdgiitr" target="_blank">Mobile Development Group</a> is a student Group at IIT Roorkee that promotes tech based learning pertaining to smartphones and tablets.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+          <!--<a class="sidebar-nav-item" href="/about/">About</a>-->
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    <a class="sidebar-nav-item" href="https://github.com/sdsmdg/sdsmdg.github.io">Blog on GitHub</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Mobile Development Group Blog</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+      <div class="container content">
+        
+        <div class="post">
+  <h1 class="post-title">Google Maps Android API v2</h1>
+  <span class="post-date">12 Jan 2015</span>
+  <p>Now that most of you are done with basic task in the challenge, it&#8217;s time to score the bonus points . You need to show the location data that you received from the user on the map. Alternatively, you can just open the map, let the user pinpoint the location and save the latitude &amp; longitude of that location. So how to accomplish this ? Google provides via Google play a library for using Google Maps in your application.</p>
+
+<h2 id='getting_started'>Getting Started</h2>
+
+<p>First of all, let&#8217;s see what an API is -</p>
+
+<blockquote>
+<p>API, an abbreviation of application program interface, is a set of routines, protocols, and tools for building software applications. The API specifies how software components should interact and are used when programming graphical user interface (GUI) components.</p>
+</blockquote>
+
+<p>Before delving into the implementation details we need to make sure we have the appropriate SDKs installed to connect to Google Play Services and get the API key for Google Maps.</p>
+
+<h4 id='1_installing_required_sdk_components'>1. Installing Required SDK Components</h4>
+
+<p>Under the Extras section in the Android SDK Manager , check if you have installed the following packages. If not , then download them.</p>
+
+<ul>
+<li>Google Play Services</li>
+
+<li>Google Repository</li>
+</ul>
+
+<p><img alt='Required Installations' src='https://lh4.googleusercontent.com/ASho7RHs3RAAibw4As8phhw2jWtj76grIj7y0SFRcec=s0' /></p>
+
+<h4 id='2_setting_up_google_play_services'>2. Setting Up Google Play Services</h4>
+
+<p>Once these packages have been installed, we must add the Google Play Services dependency to our projects build.gradle file. Open up the build.gradle file present within the module directory. Under the dependencies section add the latest version of the google-play-services library. At the time of writing, this is 6.1.71. You can find out the latest version number of the plugin, as well as many others <a href='http://gradleplease.appspot.com/'>here</a></p>
+
+<pre><code>dependencies {
+    compile fileTree(dir: &#39;libs&#39;, include:[&#39;*.jar&#39;])
+    compile &#39;com.google.android.gms:play-services:6.1.71&#39;
+}</code></pre>
+
+<h4 id='3_creating_an_api_key_for_the_app'>3. Creating an API key for the app</h4>
+
+<ul>
+<li>Navigate to <a href='https://console.developers.google.com/project'>https://console.developers.google.com/project</a>. Click on &#8220;Create Project&#8221;. Enter the project name and id of your choice.</li>
+</ul>
+
+<p><img alt='CreateProject' src='https://lh4.googleusercontent.com/QSNYokre-9cx3Aq5IvqcI65XRidKOavzhV5sdvJ-uzQ=s0' /> - Click on the &#8220;APIs &amp; auth&#8221; menu on the left, and from the submenu select APIs. From the list of APIs that appear, scroll down and ensure that Google Maps Android API v2 is set to “On”.</p>
+
+<p><img alt='SetOnGoogleMapsAPIv2' src='https://lh4.googleusercontent.com/8_bob1D13HM-0M0achMCxxRLysbt3hzKz4QtFxkSgmI=s0' /></p>
+
+<ul>
+<li>Now under the same menu on the left, select “Credentials” . Under the Public API access heading, click &#8220;Create New Key&#8221;, and then &#8220;Android Key&#8221;.</li>
+</ul>
+
+<p><img alt='CreateNewKey' src='https://lh3.googleusercontent.com/4VGgwQH1LbPsKhLlERSDAan_9lzSX7f-ScQoxpvj4oM=s0' /> - Run the following command in your command prompt to generate your developer certificates SHA1 fingerprint key:</p>
+
+<h5 id='for_windows_users'>For Windows Users</h5>
+
+<pre><code>    keytool -list -v -keystore &quot;%USERPROFILE%\.android\debug.keystore&quot; -alias androiddebugkey -storepass android -keypass android</code></pre>
+
+<h5 id='for_mac_os_or_linux_users'>For Mac OS or Linux Users</h5>
+
+<pre><code>    keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android</code></pre>
+
+<p>Take your SHA1 key, and append the apps package name to the end of it, separated by a semicolon. Paste this into the textbox and click Create.</p>
+
+<p><img alt='AddSHA1Key' src='https://lh5.googleusercontent.com/Kg3E1jIFPblpxs1zBTs7lVMfFac-cPYeFCPDGqjpGFo=s0' /></p>
+
+<ul>
+<li>You’ll see an API generated and displayed on the page. Copy the android api key to your clipboard.</li>
+</ul>
+
+<p><img alt='ReqAPIKey' src='https://lh4.googleusercontent.com/CK2PqCteAaUxNkGnnS7SFZ7xfZHrpsYxUbRVNFd-Vo8=s0' /></p>
+
+<h4 id='4_adding_the_api_key_in_our_app'>4. Adding the API key in our app</h4>
+
+<p>In your project, open up AndroidManifest.xml. Just before the &lt;/application&gt; tag add the following lines of code.</p>
+
+<pre><code>&lt;meta-data 
+    android:name=&quot;com.google.android.gms.version&quot; 
+	android:value=
+	&quot;@integer/google_play_services_version&quot; 
+/&gt;
+&lt;meta-data
+   android:name=&quot;com.google.android.maps.v2.API_KEY&quot;
+   android:value=&quot;enter_your_api_key&quot; 
+/&gt;</code></pre>
+
+<h4 id='5_adding_a_few_permissions'>5. Adding a few Permissions</h4>
+
+<p>Now we need to specify the permissions that our app needs. In order to use mapping functionality, we need to add the following permissions:</p>
+
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;
+&lt;uses-permission android:name=&quot;com.google.android.providers.gsf.permission.READ_GSERVICES&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;</code></pre>
+
+<h2 id='google_maps_components'>Google Maps Components</h2>
+
+<h3 id='the_map_object'><a href='https://developers.google.com/maps/documentation/android/map'>The map object</a></h3>
+
+<p>The key class when working with a map object is the GoogleMap class. GoogleMap models the map object within your application. Within your UI, a map will be represented by either a MapFragment or MapView object.</p>
+
+<h3 id='mapfragment'><a href='https://developer.android.com/reference/com/google/android/gms/maps/MapFragment.html'>MapFragment</a></h3>
+
+<p>MapFragment, a subclass of the Android Fragment class, allows you to place a map in an Android fragment. MapFragment objects act as containers for the map, and provide access to the GoogleMap object.</p>
+
+<p>Unlike a View, a Fragment represents a behavior or a portion of user interface in an activity. Refer to the Android documentation on Fragments to learn more.</p>
+
+<h3 id='mapview'><a href='http://developer.android.com/reference/com/google/android/gms/maps/MapView.html'>Mapview</a></h3>
+
+<p>MapView, a subclass of the Android View class, allows you to place a map in an Android View. Much like a MapFragment, the MapView acts as a container for the map, exposing core map functionality through the GoogleMap object.</p>
+
+<p>Users of this class must forward all the activity life cycle methods - such as <code>onCreate()</code>, <code>onDestroy()</code>, <code>onResume()</code>, and <code>onPause()</code> - to the corresponding methods in the MapView class.</p>
+
+<h3 id='marker'><a href='https://developer.android.com/reference/com/google/android/gms/maps/model/Marker.html'>Marker</a></h3>
+
+<p>Markers identify locations on the map. The default marker uses a standard icon, common to the Google Maps look and feel. It&#8217;s possible to change the icon&#8217;s color, image or anchor point via the API. Markers are objects of type Marker, and are added to the map with the <a href='http://developer.android.com/reference/com/google/android/gms/maps/GoogleMap.html#addMarker(com.google.android.gms.maps.model.MarkerOptions'><code>googleMap.addMarker(markerOptions)</code></a>) method.</p>
+
+<h2 id='implementation_specifics'>Implementation Specifics</h2>
+
+<p>Using the below code snippets, try to complete the task.</p>
+
+<h3 id='adding_a_map_to_the_view'>Adding a Map to the view</h3>
+
+<p>Open the xml file for the activity in which you want to view the map. Just after the basic layout opening tag add the following code.</p>
+
+<pre><code>&lt;fragment
+    android:id=&quot;@+id/map&quot;
+    android:name=
+       &quot;com.google.android.gms.maps.MapFragment&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+/&gt;</code></pre>
+
+<h3 id='initialising_the_map'>Initialising the Map</h3>
+
+<p>Declare a <a href='https://developer.android.com/reference/com/google/android/gms/maps/GoogleMap.html'>GoogleMap</a> object.</p>
+
+<pre><code>private GoogleMap googleMap ;</code></pre>
+
+<p>Now in the OnCreate( ) method of the activity, use the below code to initialise the GoogleMap instance.</p>
+
+<pre><code>googleMap = ((MapFragment) getFragmentManager()
+.findFragmentById(R.id.map)).getMap();</code></pre>
+
+<h3 id='setting_a_listener_on_map_click'>Setting a listener on Map Click</h3>
+
+<p>Remember to save the data for the clicked location. This also needs to be done in the OnCreate( ) method of the activity.</p>
+
+<pre><code>googleMap.setOnMapClickListener(new OnMapClickListener() {
+         @Override
+        public void onMapClick(LatLng latLng) {
+			 // add the code for saving the data 
+			 // and displaying a marker
+        }
+    });</code></pre>
+
+<h3 id='adding_a_marker'>Adding a Marker</h3>
+
+<p>The marker is added on the location whose latitude and location are x and y respectively.</p>
+
+<pre><code>googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(x, y))
+                        .title(&quot;Marker&quot;)
+                        .draggable(true)</code></pre>
+
+<h2 id='changing_map_type'>Changing Map Type</h2>
+
+<p>A map&#8217;s type governs the overall representation of the map. The Google Maps Android API offers four types of maps, as well as an option to have no map at all:</p>
+
+<ul>
+<li><strong>Normal</strong> : Typical road map. Roads, some man-made features, and important natural features such as rivers are shown. Road and feature labels are also visible.</li>
+
+<li><strong>Hybrid</strong> : Satellite photograph data with road maps added. Road and feature labels are also visible.</li>
+
+<li><strong>Satellite</strong> : Satellite photograph data. Road and feature labels are not visible.</li>
+
+<li><strong>Terrain</strong> : Topographic data. The map includes colors, contour lines and labels, and perspective shading. Some roads and labels are also visible.</li>
+
+<li><strong>None</strong> : No tiles. The map will be rendered as an empty grid with no tiles loaded.</li>
+</ul>
+
+<p><img alt='MapTypes' src='https://lh5.googleusercontent.com/3RcPnvhno5u3hNLdB3VUgMfMOq1FESP4ztLquP5bxdY=s0' /></p>
+
+<p>The map type can be changed by using the <a href='http://developer.android.com/reference/com/google/android/gms/maps/GoogleMap.html#setMapType(int'><code>googleMap.setMapType()</code></a>) method. Here the <code>googleMap</code> is an instance of GoogleMap class.</p>
+
+<pre><code>googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+googleMap.setMapType(GoogleMap.MAP_TYPE_NONE);</code></pre>
+
+<h2 id='conclusion'>Conclusion</h2>
+
+<p>This completes our discussion on Google Maps Android API v2 . Feel free to post any sort of doubts in the comments below or on our Facebook Group. For more resources and detailed explanation you can always refer to the following links:</p>
+
+<ul>
+<li><a href='http://www.vogella.com/tutorials/AndroidGoogleMaps/article.html'>Vogella</a></li>
+
+<li><a href='http://www.androidhive.info/2013/08/android-working-with-google-maps-v2/'>Android Hive</a></li>
+
+<li><a href='https://developers.google.com/maps/documentation/android/'>Google Developers</a></li>
+</ul>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/04/12/Styles/">
+            Styles
+            <small>12 Apr 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/02/04/list-of-selected-candidates/">
+            List of selected candidates for Mobile Development Group
+            <small>04 Feb 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/01/10/adapters/">
+            Adapters
+            <small>10 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+    var disqus_shortname = 'sdsmdgblog';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-58365637-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
